@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <Button
+        android:id="@+id/textButton"
+        style="@style/Widget.Material3.Button.TextButton.Icon"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:textColor="?attr/colorOnSurface"
+        android:textSize="15sp"
+        android:fontFamily="@font/roboto_bold"
+        android:textAppearance="?attr/textAppearanceLabelLarge"
+        android:gravity="start|center"
+        app:iconSize="24sp"
+        app:iconPadding="12dp"
+        app:iconTint="?attr/colorOnSurface"
+        tools:icon="@drawable/round_workspace_premium_24"
+        tools:text="Certificate installation and management" />
+
+</LinearLayout>
