@@ -19,9 +19,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:title="Certificate"
-                app:titleTextColor="@color/white"
+                app:titleTextColor="?attr/colorOnSurface"
                 app:navigationIcon="@drawable/ic_round_arrow_back_24"
-                app:navigationIconTint="@color/white"/>
+                app:navigationIconTint="?attr/colorOnSurface"/>
 
         </com.google.android.material.appbar.AppBarLayout>
 
