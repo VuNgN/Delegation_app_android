@@ -8,50 +8,65 @@
 
     </data>
 
-    <LinearLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:fitsSystemWindows="true"
+        tools:context=".ui.main.menu.MenuFragment">
 
-        <androidx.coordinatorlayout.widget.CoordinatorLayout
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:context=".ui.main.menu.MenuFragment">
+            android:fitsSystemWindows="true"
+            app:elevation="0dp">
 
-            <com.google.android.material.appbar.AppBarLayout
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/collapsingToolbar"
+                style="?attr/collapsingToolbarLayoutLargeStyle"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="?attr/collapsingToolbarLayoutLargeSize"
+                android:background="?android:colorBackground"
                 android:fitsSystemWindows="true"
-                app:elevation="0dp">
+                app:collapsedTitleGravity="end|center"
+                app:collapsedTitleTextAppearance="@style/TextAppearance.App.TitleBold.Collapsed"
+                app:collapsedTitleTextColor="?attr/colorSurface"
+                app:contentScrim="?attr/colorPrimary"
+                app:expandedTitleTextAppearance="@style/TextAppearance.App.TitleBlack.Expanded"
+                app:expandedTitleTextColor="?attr/colorOnSurface"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+                app:statusBarScrim="?attr/colorPrimary"
+                app:titleCollapseMode="scale"
+                tools:ignore="PrivateResource">
 
-                <com.google.android.material.appbar.CollapsingToolbarLayout
-                    style="?attr/collapsingToolbarLayoutLargeStyle"
+                <com.google.android.material.appbar.MaterialToolbar
+                    android:id="@+id/topAppBar"
+                    style="@style/Widget.App.Toolbar"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/m3_appbar_size_large"
-                    android:background="?android:colorBackground"
-                    tools:ignore="PrivateResource">
+                    android:layout_height="?attr/actionBarSize"
+                    app:elevation="0dp"
+                    app:layout_collapseMode="pin"
+                    app:title="Welcome."
+                    app:titleMarginEnd="20dp" />
 
-                    <com.google.android.material.appbar.MaterialToolbar
-                        android:id="@+id/topAppBar"
-                        style="@style/Widget.App.Toolbar"
-                        android:layout_width="match_parent"
-                        android:layout_height="?attr/actionBarSize"
-                        app:elevation="0dp"
-                        app:title="Welcome."
-                        app:titleTextColor="?attr/colorSurface" />
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
 
-                </com.google.android.material.appbar.CollapsingToolbarLayout>
+        </com.google.android.material.appbar.AppBarLayout>
 
-            </com.google.android.material.appbar.AppBarLayout>
 
-        </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:layoutAnimation="@anim/anim_menu"
-            tools:listitem="@layout/item_delegated_scope" />
-    </LinearLayout>
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="50dp"
+                android:layoutAnimation="@anim/anim_menu"
+                tools:listitem="@layout/item_delegated_scope" />
+        </FrameLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

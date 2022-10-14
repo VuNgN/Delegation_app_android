@@ -10,6 +10,18 @@
         <item name="android:fontFamily">@font/roboto_medium</item>
     </style>
 
+    <style name="TextAppearance.App.TitleBold.Collapsed" parent="TextAppearance.Material3.TitleLarge">
+        <item name="fontFamily">@font/roboto_bold</item>
+        <item name="android:fontFamily">@font/roboto_bold</item>
+    </style>
+
+    <style name="TextAppearance.App.TitleBlack.Expanded" parent="TextAppearance.Material3.TitleLarge">
+        <item name="fontFamily">@font/roboto_black</item>
+        <item name="android:fontFamily">@font/roboto_black</item>
+        <item name="android:textSize">35sp</item>
+    </style>
+
+
     <style name="TextAppearance.App.TitleMedium" parent="TextAppearance.Material3.TitleMedium">
         <item name="fontFamily">@font/roboto_medium</item>
         <item name="android:fontFamily">@font/roboto_medium</item>

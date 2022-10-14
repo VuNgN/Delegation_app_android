@@ -29,7 +29,7 @@
         <item name="colorPrimaryInverse">@color/md_theme_dark_inversePrimary</item>
 
         <!-- status bar -->
-        <item name="android:statusBarColor">@color/md_theme_dark_background</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
 
         <!-- toolbar -->
         <item name="toolbarStyle">@style/Widget.App.Toolbar</item>
