@@ -62,22 +62,26 @@ class MenuFragment : Fragment() {
         ScopeData(
             "Certificate installation and management",
             ContextCompat.getDrawable(requireActivity(), R.drawable.round_workspace_premium_24)!!,
-            ScopeType.DELEGATION_CERT
+            ScopeType.DELEGATION_CERT,
+            true
         ),
         ScopeData(
             "Managed configurations management",
             ContextCompat.getDrawable(requireActivity(), R.drawable.ic_round_manage_accounts_24)!!,
-            ScopeType.DELEGATION_APP_RESTRICTIONS
+            ScopeType.DELEGATION_APP_RESTRICTIONS,
+            false
         ),
         ScopeData(
             "Blocking uninstallation",
             ContextCompat.getDrawable(requireActivity(), R.drawable.ic_round_block_24)!!,
-            ScopeType.DELEGATION_BLOCK_UNINSTALL
+            ScopeType.DELEGATION_BLOCK_UNINSTALL,
+            false
         ),
         ScopeData(
             "Permission policy and permission grant state",
             ContextCompat.getDrawable(requireActivity(), R.drawable.ic_round_policy_24)!!,
-            ScopeType.DELEGATION_PERMISSION_GRANT
+            ScopeType.DELEGATION_PERMISSION_GRANT,
+            false
         ),
         ScopeData(
             "Package access state",
@@ -85,22 +89,26 @@ class MenuFragment : Fragment() {
                 requireActivity(),
                 R.drawable.ic_round_system_security_update_good_24
             )!!,
-            ScopeType.DELEGATION_PACKAGE_ACCESS
+            ScopeType.DELEGATION_PACKAGE_ACCESS,
+            false
         ),
         ScopeData(
             "Enabling system apps",
             ContextCompat.getDrawable(requireActivity(), R.drawable.ic_round_inventory_24)!!,
-            ScopeType.DELEGATION_ENABLE_SYSTEM_APP
+            ScopeType.DELEGATION_ENABLE_SYSTEM_APP,
+            false
         ),
         ScopeData(
             "Package management",
             ContextCompat.getDrawable(requireActivity(), R.drawable.ic_round_get_app_24)!!,
-            ScopeType.DELEGATION_PACKAGE_MANAGEMENT
+            ScopeType.DELEGATION_PACKAGE_MANAGEMENT,
+            false
         ),
         ScopeData(
             "Logging",
             ContextCompat.getDrawable(requireActivity(), R.drawable.ic_round_rss_feed_24)!!,
-            ScopeType.DELEGATION_LOGGING
+            ScopeType.DELEGATION_LOGGING,
+            false
         ),
     )
 }

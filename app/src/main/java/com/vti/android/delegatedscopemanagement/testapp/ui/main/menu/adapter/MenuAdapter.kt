@@ -3,26 +3,27 @@ package com.vti.android.delegatedscopemanagement.testapp.ui.main.menu.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.button.MaterialButton
 import com.vti.android.delegatedscopemanagement.testapp.data.pojo.ScopeData
 import com.vti.android.delegatedscopemanagement.testapp.databinding.ItemDelegatedScopeBinding
 
 class MenuAdapter(private val callback: ((data: ScopeData) -> Unit)? = null) :
     RecyclerView.Adapter<MenuAdapter.ViewHolder>() {
-    private lateinit var data: List<ScopeData>
+    private lateinit var datas: List<ScopeData>
 
     inner class ViewHolder(private val binding: ItemDelegatedScopeBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(position: Int) {
+            val data = datas[position]
             binding.apply {
-                textButton.text = data[position].title
-                (textButton as MaterialButton).icon = data[position].icon
+                titleText = data.title
+                isEnable = data.state
+                icon = data.icon
             }
         }
 
         fun handleEvent(position: Int) {
-            binding.textButton.setOnClickListener {
-                callback?.invoke(data[position])
+            itemView.setOnClickListener {
+                callback?.invoke(datas[position])
             }
         }
     }
@@ -38,9 +39,9 @@ class MenuAdapter(private val callback: ((data: ScopeData) -> Unit)? = null) :
         holder.handleEvent(position)
     }
 
-    override fun getItemCount(): Int = data.size
+    override fun getItemCount(): Int = datas.size
 
     fun setData(data: List<ScopeData>) {
-        this.data = data
+        this.datas = data
     }
 }
