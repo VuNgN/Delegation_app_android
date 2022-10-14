@@ -30,12 +30,10 @@
                 android:fitsSystemWindows="true"
                 app:collapsedTitleGravity="end|center"
                 app:collapsedTitleTextAppearance="@style/TextAppearance.App.TitleBold.Collapsed"
-                app:collapsedTitleTextColor="?attr/colorSurface"
-                app:contentScrim="?attr/colorPrimary"
+
                 app:expandedTitleTextAppearance="@style/TextAppearance.App.TitleBlack.Expanded"
                 app:expandedTitleTextColor="?attr/colorOnSurface"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
-                app:statusBarScrim="?attr/colorPrimary"
                 app:titleCollapseMode="scale"
                 tools:ignore="PrivateResource">
 

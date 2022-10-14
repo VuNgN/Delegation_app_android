@@ -7,17 +7,19 @@
 
     <Button
         android:id="@+id/textButton"
-        style="@style/Widget.Material3.Button.TextButton.Icon"
+        style="@style/Widget.App.Button.TextButton.Icon"
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:background="@drawable/button_square"
+        android:fontFamily="@font/roboto_bold"
+        android:gravity="start|center"
+        android:textAppearance="?attr/textAppearanceLabelLarge"
         android:textColor="?attr/colorOnSurface"
         android:textSize="15sp"
-        android:fontFamily="@font/roboto_bold"
-        android:textAppearance="?attr/textAppearanceLabelLarge"
-        android:gravity="start|center"
-        app:iconSize="24sp"
         app:iconPadding="12dp"
+        app:iconSize="24sp"
         app:iconTint="?attr/colorOnSurface"
+        app:shapeAppearance="?attr/shapeAppearanceMediumComponent"
         tools:icon="@drawable/round_workspace_premium_24"
         tools:text="Certificate installation and management" />
 
