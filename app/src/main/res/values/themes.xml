@@ -31,5 +31,8 @@
         <!-- status bar -->
         <item name="android:statusBarColor">@color/md_theme_light_background</item>
         <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+
+        <!-- toolbar -->
+        <item name="toolbarStyle">@style/Widget.App.Toolbar</item>
     </style>
 </resources>

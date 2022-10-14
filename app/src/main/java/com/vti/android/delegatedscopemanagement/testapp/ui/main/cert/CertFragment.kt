@@ -5,14 +5,32 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.vti.android.delegatedscopemanagement.testapp.R
+import androidx.navigation.fragment.findNavController
+import com.vti.android.delegatedscopemanagement.testapp.databinding.FragmentCertBinding
 
 class CertFragment : Fragment() {
+    private lateinit var binding: FragmentCertBinding
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_cert, container, false)
+        return FragmentCertBinding.inflate(inflater, container, false).also {
+            binding = it
+        }.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        handleEvent()
+    }
+
+    private fun handleEvent() {
+        binding.apply {
+            topAppBar.setNavigationOnClickListener {
+                findNavController().popBackStack()
+            }
+        }
     }
 }

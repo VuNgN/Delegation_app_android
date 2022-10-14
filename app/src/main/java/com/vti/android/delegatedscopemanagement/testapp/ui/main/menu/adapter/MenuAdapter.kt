@@ -21,7 +21,7 @@ class MenuAdapter(private val callback: ((data: ScopeData) -> Unit)? = null) :
         }
 
         fun handleEvent(position: Int) {
-            itemView.setOnClickListener {
+            binding.textButton.setOnClickListener {
                 callback?.invoke(data[position])
             }
         }

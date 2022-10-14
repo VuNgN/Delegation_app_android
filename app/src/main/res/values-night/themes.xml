@@ -30,5 +30,8 @@
 
         <!-- status bar -->
         <item name="android:statusBarColor">@color/md_theme_dark_background</item>
+
+        <!-- toolbar -->
+        <item name="toolbarStyle">@style/Widget.App.Toolbar</item>
     </style>
 </resources>

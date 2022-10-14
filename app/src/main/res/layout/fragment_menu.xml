@@ -33,6 +33,7 @@
 
                     <com.google.android.material.appbar.MaterialToolbar
                         android:id="@+id/topAppBar"
+                        style="@style/Widget.App.Toolbar"
                         android:layout_width="match_parent"
                         android:layout_height="?attr/actionBarSize"
                         app:elevation="0dp"
@@ -50,6 +51,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
+            android:layoutAnimation="@anim/anim_menu"
             tools:listitem="@layout/item_delegated_scope" />
     </LinearLayout>
 </layout>
