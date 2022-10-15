@@ -1,9 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Widget.App.CollapsingToolbar" parent="Widget.Material3.CollapsingToolbar.Large">
+        <item name="background">?android:colorBackground</item>
+        <item name="android:fitsSystemWindows">true</item>
+        <item name="collapsedTitleGravity">start|center</item>
+        <item name="collapsedTitleTextAppearance">@style/TextAppearance.App.TitleBold.Collapsed</item>
+        <item name="expandedTitleTextAppearance">@style/TextAppearance.App.TitleBlack.Expanded</item>
+        <item name="expandedTitleTextColor">?attr/colorOnSurface</item>
+        <item name="layout_scrollFlags">scroll|exitUntilCollapsed|snap</item>
+        <item name="titleCollapseMode">scale</item>
+    </style>
 
     <style name="Widget.App.Toolbar" parent="Widget.Material3.Toolbar">
         <item name="titleTextAppearance">@style/TextAppearance.App.TitleLarge</item>
         <item name="subtitleTextAppearance">@style/TextAppearance.App.TitleMedium</item>
+        <item name="elevation">0dp</item>
+        <item name="layout_collapseMode">pin</item>
+        <item name="titleMarginEnd">20dp</item>
+        <item name="android:titleMarginEnd" tools:targetApi="n">20dp</item>
+        <item name="navigationIconTint">?attr/colorOnSurface</item>
     </style>
 
     <style name="TextAppearance.App.TitleLarge" parent="TextAppearance.Material3.TitleLarge">

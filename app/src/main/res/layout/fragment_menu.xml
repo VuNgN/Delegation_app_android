@@ -30,7 +30,6 @@
                 android:fitsSystemWindows="true"
                 app:collapsedTitleGravity="end|center"
                 app:collapsedTitleTextAppearance="@style/TextAppearance.App.TitleBold.Collapsed"
-
                 app:expandedTitleTextAppearance="@style/TextAppearance.App.TitleBlack.Expanded"
                 app:expandedTitleTextColor="?attr/colorOnSurface"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
@@ -50,7 +49,6 @@
             </com.google.android.material.appbar.CollapsingToolbarLayout>
 
         </com.google.android.material.appbar.AppBarLayout>
-
 
         <FrameLayout
             android:layout_width="match_parent"

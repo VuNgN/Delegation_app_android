@@ -14,7 +14,7 @@
         android:id="@+id/menuFragment"
         android:name="com.vti.android.delegatedscopemanagement.testapp.ui.main.menu.MenuFragment"
         android:label="fragment_menu"
-        tools:layout="@layout/fragment_menu" >
+        tools:layout="@layout/fragment_menu">
         <action
             android:id="@+id/action_menuFragment_to_certFragment"
             app:destination="@id/certFragment"
@@ -22,5 +22,89 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_menuFragment_to_restrictFragment"
+            app:destination="@id/restrictFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_menuFragment_to_blockUninstallFragment"
+            app:destination="@id/blockUninstallFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_menuFragment_to_permissionFragment"
+            app:destination="@id/permissionFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_menuFragment_to_packageAccessFragment"
+            app:destination="@id/packageAccessFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_menuFragment_to_enableSystemAppFragment"
+            app:destination="@id/enableSystemAppFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_menuFragment_to_packageManageFragment"
+            app:destination="@id/packageManageFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_menuFragment_to_loggingFragment"
+            app:destination="@id/loggingFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
+    <fragment
+        android:id="@+id/blockUninstallFragment"
+        android:name="com.vti.android.delegatedscopemanagement.testapp.ui.main.blockuninstall.BlockUninstallFragment"
+        android:label="fragment_block_uninstall"
+        tools:layout="@layout/fragment_block_uninstall" />
+    <fragment
+        android:id="@+id/enableSystemAppFragment"
+        android:name="com.vti.android.delegatedscopemanagement.testapp.ui.main.enablesystemapp.EnableSystemAppFragment"
+        android:label="fragment_enable_system_app"
+        tools:layout="@layout/fragment_enable_system_app" />
+    <fragment
+        android:id="@+id/loggingFragment"
+        android:name="com.vti.android.delegatedscopemanagement.testapp.ui.main.logging.LoggingFragment"
+        android:label="fragment_logging"
+        tools:layout="@layout/fragment_logging" />
+    <fragment
+        android:id="@+id/packageAccessFragment"
+        android:name="com.vti.android.delegatedscopemanagement.testapp.ui.main.packageaccess.PackageAccessFragment"
+        android:label="fragment_package_access"
+        tools:layout="@layout/fragment_package_access" />
+    <fragment
+        android:id="@+id/packageManageFragment"
+        android:name="com.vti.android.delegatedscopemanagement.testapp.ui.main.packagemanage.PackageManageFragment"
+        android:label="fragment_package_manage"
+        tools:layout="@layout/fragment_package_manage" />
+    <fragment
+        android:id="@+id/permissionFragment"
+        android:name="com.vti.android.delegatedscopemanagement.testapp.ui.main.permission.PermissionFragment"
+        android:label="fragment_permission"
+        tools:layout="@layout/fragment_permission" />
+    <fragment
+        android:id="@+id/restrictFragment"
+        android:name="com.vti.android.delegatedscopemanagement.testapp.ui.main.restriction.RestrictFragment"
+        android:label="fragment_restrict"
+        tools:layout="@layout/fragment_restrict" />
 </navigation>

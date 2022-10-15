@@ -44,13 +44,13 @@ class MenuFragment : Fragment() {
     private fun onRecyclerViewItemClick(data: ScopeData) {
         when (data.delegationValue) {
             ScopeType.DELEGATION_CERT -> goto(MenuFragmentDirections.actionMenuFragmentToCertFragment())
-            ScopeType.DELEGATION_APP_RESTRICTIONS -> {}
-            ScopeType.DELEGATION_BLOCK_UNINSTALL -> {}
-            ScopeType.DELEGATION_PERMISSION_GRANT -> {}
-            ScopeType.DELEGATION_PACKAGE_ACCESS -> {}
-            ScopeType.DELEGATION_ENABLE_SYSTEM_APP -> {}
-            ScopeType.DELEGATION_PACKAGE_MANAGEMENT -> {}
-            ScopeType.DELEGATION_LOGGING -> {}
+            ScopeType.DELEGATION_APP_RESTRICTIONS -> goto(MenuFragmentDirections.actionMenuFragmentToRestrictFragment())
+            ScopeType.DELEGATION_BLOCK_UNINSTALL -> goto(MenuFragmentDirections.actionMenuFragmentToBlockUninstallFragment())
+            ScopeType.DELEGATION_PERMISSION_GRANT -> goto(MenuFragmentDirections.actionMenuFragmentToPermissionFragment())
+            ScopeType.DELEGATION_PACKAGE_ACCESS -> goto(MenuFragmentDirections.actionMenuFragmentToPackageAccessFragment())
+            ScopeType.DELEGATION_ENABLE_SYSTEM_APP -> goto(MenuFragmentDirections.actionMenuFragmentToEnableSystemAppFragment())
+            ScopeType.DELEGATION_PACKAGE_MANAGEMENT -> goto(MenuFragmentDirections.actionMenuFragmentToPackageManageFragment())
+            ScopeType.DELEGATION_LOGGING -> goto(MenuFragmentDirections.actionMenuFragmentToLoggingFragment())
         }
     }
 

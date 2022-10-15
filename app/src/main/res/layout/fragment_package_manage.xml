@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".ui.main.cert.CertFragment">
+    tools:context=".ui.main.packagemanage.PackageManageFragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
@@ -26,7 +26,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:navigationIcon="@drawable/ic_round_arrow_back_24"
-                app:title="Certificate" />
+                app:title="Package management" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
