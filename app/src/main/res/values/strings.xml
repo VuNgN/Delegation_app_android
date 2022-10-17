@@ -2,12 +2,15 @@
     <string name="app_name">権限移譲対象アプリ</string>
     <string name="state_enable">Enable</string>
     <string name="state_disable">Disable</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="state_success">[SUCCESS]</string>
     <string name="state_failure">[FAILURE]</string>
     <string name="description_certificate_fragment">We have a certificate named \'Example 1\' available for you.</string>
+    <string name="description_restriction_fragment">We fixed the restricted app as Google chrome app</string>
     <string name="button_cert_get">Get number of user CA certs</string>
     <string name="button_cert_install">Install \'Example 1\' user CA cert</string>
     <string name="button_cert_uninstall">Uninstall \'Example 1\' user CA cert</string>
     <string name="button_cert_uninstall_all">Uninstall all user CA certs</string>
+    <string name="google_chrome">Google chrome</string>
+    <string name="restriction_incognito_mode">Incognito mode</string>
+    <string name="restriction_edit_bookmarks">Edit bookmarks</string>
 </resources>
