@@ -1,4 +1,4 @@
-package com.vti.android.delegatedscopemanagement.testapp.base.adapter.recyclerviewinterface
+package com.vungn.android.mybase.adapter.recyclerviewinterface
 
 interface IMyRecyclerView<U> {
     fun getListData(): List<U>
