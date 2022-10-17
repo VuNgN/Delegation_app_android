@@ -18,36 +18,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingVertical="5dp"
-        android:weightSum="10">
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/dateTextView"
-            style="@style/Widget.App.TextView"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="3"
-            app:fontFamily="@font/roboto_black"
-            app:isSuccess="@{isSuccess}"
-            tools:text="Demo" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/stateTextView"
-            style="@style/Widget.App.TextView"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="3"
-            app:fontFamily="@font/roboto_black"
-            app:isSuccess="@{isSuccess}"
-            tools:text="Demo" />
+        android:paddingVertical="5dp">
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/titleTextView"
             style="@style/Widget.App.TextView"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="4"
-            app:fontFamily="@font/roboto_black"
+            android:textSize="12sp"
+            app:fontFamily="@font/robotomono_regular"
             app:isSuccess="@{isSuccess}"
             app:text="@{title}"
             tools:text="Demo" />

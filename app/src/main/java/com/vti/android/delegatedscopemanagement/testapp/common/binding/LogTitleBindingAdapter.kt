@@ -29,12 +29,16 @@ object LogTitleBindingAdapter {
             typeDisableValue,
             true
         )
-        when (textView.id) {
-            R.id.dateTextView -> textView.text = formatDate
-            R.id.stateTextView -> textView.text =
-                if (state) textView.context.getString(R.string.state_success)
-                else textView.context.getString(R.string.state_failure)
-            R.id.titleTextView -> if (title != null) textView.text = title
+        val result =
+            if (state) textView.context.getString(R.string.state_success) else textView.context.getString(
+                R.string.state_failure
+            )
+        textView.text = buildString {
+            append(formatDate)
+            append("\t")
+            append(result)
+            append("\t-> ")
+            append(title)
         }
         when (state) {
             true -> {
