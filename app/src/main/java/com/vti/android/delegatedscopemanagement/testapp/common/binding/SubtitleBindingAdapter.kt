@@ -19,7 +19,7 @@ object SubtitleBindingAdapter {
             true
         )
         textView.context.theme.resolveAttribute(
-            com.google.android.material.R.attr.colorSurfaceVariant,
+            com.google.android.material.R.attr.colorOnSurfaceVariant,
             typeDisableValue,
             true
         )
@@ -27,10 +27,12 @@ object SubtitleBindingAdapter {
             true -> {
                 textView.text = textView.context.getString(R.string.state_enable)
                 textView.setTextColor(typeEnableValue.data)
+                textView.alpha = 1F
             }
             false -> {
                 textView.text = textView.context.getString(R.string.state_disable)
                 textView.setTextColor(typeDisableValue.data)
+                textView.alpha = 0.6F
             }
         }
     }
