@@ -1,4 +1,4 @@
-package com.vti.android.delegatedscopemanagement.testapp.ui.main.permission
+package com.vti.android.delegatedscopemanagement.testapp.ui.main.permission.policy
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,18 +6,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.vti.android.delegatedscopemanagement.testapp.R
-import com.vti.android.delegatedscopemanagement.testapp.databinding.FragmentPermissionBinding
+import com.vti.android.delegatedscopemanagement.testapp.databinding.FragmentPolicyBinding
 
-class PermissionFragment : Fragment() {
-    private lateinit var binding: FragmentPermissionBinding
+class PolicyFragment : Fragment() {
+    private lateinit var binding: FragmentPolicyBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        return FragmentPermissionBinding.inflate(inflater, container, false).also {
+        return FragmentPolicyBinding.inflate(inflater, container, false).also {
             binding = it
         }.root
     }
@@ -31,12 +30,6 @@ class PermissionFragment : Fragment() {
         binding.apply {
             topAppBar.setNavigationOnClickListener {
                 findNavController().popBackStack()
-            }
-            policy.setOnClickListener {
-                findNavController().navigate(R.id.action_permissionFragment_to_policyFragment)
-            }
-            grantState.setOnClickListener {
-                findNavController().navigate(R.id.action_permissionFragment_to_grantStateFragment)
             }
         }
     }

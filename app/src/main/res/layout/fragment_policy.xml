@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".ui.main.permission.PermissionFragment">
+    tools:context=".ui.main.permission.policy.PolicyFragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
@@ -26,7 +26,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:navigationIcon="@drawable/ic_round_arrow_back_24"
-                app:title="Permission" />
+                app:title="Policy" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
@@ -39,19 +39,6 @@
         android:orientation="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/policy"
-            style="@style/Widget.App.Button.TextButton.Icon"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/policy" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/grant_state"
-            style="@style/Widget.App.Button.TextButton.Icon"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/grant_state" />
 
     </LinearLayout>
 

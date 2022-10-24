@@ -14,4 +14,6 @@
     <string name="restriction_incognito_mode">Incognito mode</string>
     <string name="restriction_edit_bookmarks">Edit bookmarks</string>
     <string name="package_name">Package name</string>
+    <string name="policy">Policy</string>
+    <string name="grant_state">Grant state</string>
 </resources>

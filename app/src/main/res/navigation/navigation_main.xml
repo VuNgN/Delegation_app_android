@@ -101,10 +101,35 @@
         android:id="@+id/permissionFragment"
         android:name="com.vti.android.delegatedscopemanagement.testapp.ui.main.permission.PermissionFragment"
         android:label="fragment_permission"
-        tools:layout="@layout/fragment_permission" />
+        tools:layout="@layout/fragment_permission">
+        <action
+            android:id="@+id/action_permissionFragment_to_grantStateFragment"
+            app:destination="@id/grantStateFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_permissionFragment_to_policyFragment"
+            app:destination="@id/policyFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
     <fragment
         android:id="@+id/restrictFragment"
         android:name="com.vti.android.delegatedscopemanagement.testapp.ui.main.restriction.RestrictFragment"
         android:label="fragment_restrict"
         tools:layout="@layout/fragment_restrict" />
+    <fragment
+        android:id="@+id/grantStateFragment"
+        android:name="com.vti.android.delegatedscopemanagement.testapp.ui.main.permission.grantstate.GrantStateFragment"
+        android:label="fragment_grant_state"
+        tools:layout="@layout/fragment_grant_state" />
+    <fragment
+        android:id="@+id/policyFragment"
+        android:name="com.vti.android.delegatedscopemanagement.testapp.ui.main.permission.policy.PolicyFragment"
+        android:label="fragment_policy"
+        tools:layout="@layout/fragment_policy" />
 </navigation>
