@@ -13,4 +13,5 @@
     <string name="google_chrome">Google chrome</string>
     <string name="restriction_incognito_mode">Incognito mode</string>
     <string name="restriction_edit_bookmarks">Edit bookmarks</string>
+    <string name="package_name">Package name</string>
 </resources>
