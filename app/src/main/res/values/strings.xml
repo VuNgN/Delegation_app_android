@@ -16,4 +16,11 @@
     <string name="package_name">Package name</string>
     <string name="policy">Policy</string>
     <string name="grant_state">Grant state</string>
+    <string name="auto_grant">Auto grant</string>
+    <string name="prompt">Prompt</string>
+    <string name="auto_deny">Auto deny</string>
+    <string name="permission">Permission</string>
+    <string name="grant_state_grant">Grant</string>
+    <string name="grant_state_default">Default</string>
+    <string name="grant_state_deny">Deny</string>
 </resources>

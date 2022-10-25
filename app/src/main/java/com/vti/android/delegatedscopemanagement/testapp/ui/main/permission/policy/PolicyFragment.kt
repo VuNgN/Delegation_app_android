@@ -6,6 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.vti.android.delegatedscopemanagement.testapp.common.adapter.LogAdapter
+import com.vti.android.delegatedscopemanagement.testapp.common.adapter.data.Log
 import com.vti.android.delegatedscopemanagement.testapp.databinding.FragmentPolicyBinding
 
 class PolicyFragment : Fragment() {
@@ -23,7 +26,18 @@ class PolicyFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupUi()
         handleEvent()
+    }
+
+    private fun setupUi() {
+        val logs = getLogs()
+        val adapter = LogAdapter()
+        adapter.setListData(logs)
+        binding.apply {
+            recyclerView.adapter = adapter
+            recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        }
     }
 
     private fun handleEvent() {
@@ -33,4 +47,14 @@ class PolicyFragment : Fragment() {
             }
         }
     }
+
+    private fun getLogs() = listOf(
+        Log("Hello would", true),
+        Log("Oh, hi!", false),
+        Log(
+            "Exception: java.lang.NullPointerException: Parameter specified as non-null is null: method kotlin.jvm.internal.Intrinsics.checkNotNullParameter, parameter title",
+            false
+        ),
+        Log("Oh, hi!", false),
+    )
 }
