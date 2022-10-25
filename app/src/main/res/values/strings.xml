@@ -27,4 +27,6 @@
     <string name="hide">Hide</string>
     <string name="suspend">Suspend</string>
     <string name="package_name_or_uri">Package name or Uri</string>
+    <string name="esa_helper_text">Press SEND button to Enable app</string>
+    <string name="bu_helper_text">Press SEND button to Restrict</string>
 </resources>

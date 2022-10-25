@@ -46,7 +46,7 @@
             android:hint="@string/package_name_or_uri"
             app:endIconDrawable="@drawable/ic_round_send_24"
             app:endIconMode="custom"
-            app:helperText="Press SEND button to Enable app"
+            app:helperText="@string/esa_helper_text"
             app:helperTextEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText

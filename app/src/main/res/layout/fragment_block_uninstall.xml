@@ -47,12 +47,16 @@
             android:hint="@string/package_name"
             app:endIconDrawable="@drawable/ic_round_send_24"
             app:endIconMode="custom"
-            app:helperText="Press SEND button to Restrict"
+            app:helperText="@string/bu_helper_text"
             app:helperTextEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:imeOptions="actionDone"
+                android:inputType="text"
+                android:lines="1"
+                android:maxLines="1" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
