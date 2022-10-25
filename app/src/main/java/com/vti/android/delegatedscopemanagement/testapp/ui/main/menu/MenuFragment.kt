@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,9 +15,14 @@ import com.vti.android.delegatedscopemanagement.testapp.data.pojo.ScopeData
 import com.vti.android.delegatedscopemanagement.testapp.data.pojo.ScopeType
 import com.vti.android.delegatedscopemanagement.testapp.databinding.FragmentMenuBinding
 import com.vti.android.delegatedscopemanagement.testapp.ui.main.menu.adapter.MenuAdapter
+import com.vti.android.delegatedscopemanagement.testapp.ui.main.menu.contract.MenuViewModel
+import com.vti.android.delegatedscopemanagement.testapp.ui.main.menu.contract.impl.MenuViewModelImpl
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MenuFragment : Fragment() {
     private lateinit var binding: FragmentMenuBinding
+    private val vm: MenuViewModel by viewModels<MenuViewModelImpl>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -63,25 +69,25 @@ class MenuFragment : Fragment() {
             "Certificate installation and management",
             ContextCompat.getDrawable(requireActivity(), R.drawable.round_workspace_premium_24)!!,
             ScopeType.DELEGATION_CERT,
-            true
+            vm.isCert().value == true
         ),
         ScopeData(
             "Managed configurations management",
             ContextCompat.getDrawable(requireActivity(), R.drawable.ic_round_manage_accounts_24)!!,
             ScopeType.DELEGATION_APP_RESTRICTIONS,
-            false
+            vm.isManagedConfig().value == true
         ),
         ScopeData(
             "Blocking uninstallation",
             ContextCompat.getDrawable(requireActivity(), R.drawable.ic_round_block_24)!!,
             ScopeType.DELEGATION_BLOCK_UNINSTALL,
-            false
+            vm.isBlockUninstall().value == true
         ),
         ScopeData(
             "Permission policy and permission grant state",
             ContextCompat.getDrawable(requireActivity(), R.drawable.ic_round_policy_24)!!,
             ScopeType.DELEGATION_PERMISSION_GRANT,
-            false
+            vm.isPermission().value == true
         ),
         ScopeData(
             "Package access state",
@@ -90,25 +96,25 @@ class MenuFragment : Fragment() {
                 R.drawable.ic_round_system_security_update_good_24
             )!!,
             ScopeType.DELEGATION_PACKAGE_ACCESS,
-            false
+            vm.isPackageAccess().value == true
         ),
         ScopeData(
             "Enabling system apps",
             ContextCompat.getDrawable(requireActivity(), R.drawable.ic_round_inventory_24)!!,
             ScopeType.DELEGATION_ENABLE_SYSTEM_APP,
-            false
+            vm.isEnableSystemApp().value == true
         ),
         ScopeData(
             "Package management",
             ContextCompat.getDrawable(requireActivity(), R.drawable.ic_round_get_app_24)!!,
             ScopeType.DELEGATION_PACKAGE_MANAGEMENT,
-            false
+            vm.isPackageManagement().value == true
         ),
         ScopeData(
             "Logging",
             ContextCompat.getDrawable(requireActivity(), R.drawable.ic_round_rss_feed_24)!!,
             ScopeType.DELEGATION_LOGGING,
-            false
+            vm.isLogging().value == true
         ),
     )
 }
