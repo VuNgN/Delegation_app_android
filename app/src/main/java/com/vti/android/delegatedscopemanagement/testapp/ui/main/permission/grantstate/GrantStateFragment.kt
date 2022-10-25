@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.vti.android.delegatedscopemanagement.testapp.common.adapter.LogAdapter
 import com.vti.android.delegatedscopemanagement.testapp.common.adapter.data.Log
@@ -52,9 +51,6 @@ class GrantStateFragment : Fragment() {
 
     private fun handleEvent() {
         binding.apply {
-            topAppBar.setNavigationOnClickListener {
-                findNavController().popBackStack()
-            }
             textInputEditText.setOnFocusChangeListener { _, hasFocus ->
                 when (hasFocus) {
                     true -> {}

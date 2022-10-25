@@ -6,8 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.tabs.TabLayoutMediator
 import com.vti.android.delegatedscopemanagement.testapp.R
 import com.vti.android.delegatedscopemanagement.testapp.databinding.FragmentPermissionBinding
+import com.vti.android.delegatedscopemanagement.testapp.ui.main.permission.adapter.PermissionCollectionAdapter
 
 class PermissionFragment : Fragment() {
     private lateinit var binding: FragmentPermissionBinding
@@ -24,19 +26,27 @@ class PermissionFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupUi()
         handleEvent()
+    }
+
+    private fun setupUi() {
+        val permissionCollectionAdapter = PermissionCollectionAdapter(this)
+        binding.apply {
+            viewPager.adapter = permissionCollectionAdapter
+            TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+                when (position) {
+                    0 -> tab.text = context?.resources?.getString(R.string.grant_state)
+                    1 -> tab.text = context?.resources?.getString(R.string.policy)
+                }
+            }.attach()
+        }
     }
 
     private fun handleEvent() {
         binding.apply {
             topAppBar.setNavigationOnClickListener {
                 findNavController().popBackStack()
-            }
-            policy.setOnClickListener {
-                findNavController().navigate(R.id.action_permissionFragment_to_policyFragment)
-            }
-            grantState.setOnClickListener {
-                findNavController().navigate(R.id.action_permissionFragment_to_grantStateFragment)
             }
         }
     }
