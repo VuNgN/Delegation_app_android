@@ -23,4 +23,7 @@
     <string name="grant_state_grant">Grant</string>
     <string name="grant_state_default">Default</string>
     <string name="grant_state_deny">Deny</string>
+    <string name="clear">Clear</string>
+    <string name="hide">Hide</string>
+    <string name="suspend">Suspend</string>
 </resources>
