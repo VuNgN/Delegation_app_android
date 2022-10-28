@@ -5,7 +5,7 @@ import com.vungn.android.mybase.adapter.recyclerviewinterface.IMyRecyclerView
 
 abstract class RecyclerViewAdapter<U> : RecyclerView.Adapter<MyViewHolder>(),
     IMyRecyclerView<U> {
-    private lateinit var listData: List<U>
+    private lateinit var listData: MutableList<U>
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.bind(position)
@@ -14,9 +14,9 @@ abstract class RecyclerViewAdapter<U> : RecyclerView.Adapter<MyViewHolder>(),
 
     override fun getItemCount(): Int = listData.size
 
-    override fun getListData(): List<U> = listData
+    override fun getListData(): MutableList<U> = listData
 
-    override fun setListData(listData: List<U>) {
+    override fun setListData(listData: MutableList<U>) {
         this.listData = listData
     }
 }

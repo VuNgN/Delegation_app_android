@@ -5,14 +5,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.vti.android.delegatedscopemanagement.testapp.common.adapter.LogAdapter
 import com.vti.android.delegatedscopemanagement.testapp.common.adapter.data.Log
+import com.vti.android.delegatedscopemanagement.testapp.common.layoutmanager.CustomLinearLayoutManager
 import com.vti.android.delegatedscopemanagement.testapp.databinding.FragmentCertBinding
+import com.vti.android.delegatedscopemanagement.testapp.ui.main.cert.contract.CertViewModel
+import com.vti.android.delegatedscopemanagement.testapp.ui.main.cert.contract.impl.CertViewModelImpl
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class CertFragment : Fragment() {
     private lateinit var binding: FragmentCertBinding
+    private val vm: CertViewModel by viewModels<CertViewModelImpl>()
+    private lateinit var adapter: LogAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -21,6 +28,7 @@ class CertFragment : Fragment() {
         // Inflate the layout for this fragment
         return FragmentCertBinding.inflate(inflater, container, false).also {
             binding = it
+            binding.vm = vm
         }.root
     }
 
@@ -32,29 +40,26 @@ class CertFragment : Fragment() {
 
     private fun setupUi() {
         val logs = getLogs()
-        val adapter = LogAdapter()
+        adapter = LogAdapter()
         adapter.setListData(logs)
         binding.apply {
             recyclerView.adapter = adapter
-            recyclerView.layoutManager = LinearLayoutManager(requireContext())
+            recyclerView.layoutManager = CustomLinearLayoutManager(requireContext())
         }
     }
 
-    private fun getLogs() = listOf(
-        Log("Hello would", true),
-        Log("Oh, hi!", false),
-        Log(
-            "Exception: java.lang.NullPointerException: Parameter specified as non-null is null: method kotlin.jvm.internal.Intrinsics.checkNotNullParameter, parameter title",
-            false
-        ),
-        Log("Oh, hi!", false),
-    )
+    private fun getLogs() = mutableListOf<Log>()
 
     private fun handleEvent() {
         binding.apply {
             topAppBar.setNavigationOnClickListener {
                 findNavController().popBackStack()
             }
+        }
+        vm.log().observe(viewLifecycleOwner) { log ->
+            adapter.addLog(log)
+            adapter.notifyItemChanged(adapter.itemCount)
+            binding.recyclerView.smoothScrollToPosition(adapter.itemCount)
         }
     }
 }

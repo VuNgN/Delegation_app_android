@@ -160,7 +160,11 @@ class MenuFragment : Fragment() {
 
     override fun onDestroy() {
         super.onDestroy()
-        requireActivity().unregisterReceiver(receiver)
+        try {
+            requireActivity().unregisterReceiver(receiver)
+        } catch (e: java.lang.Exception) {
+            Log.e(TAG, "onDestroy: ${e.message}")
+        }
     }
 
     companion object {

@@ -30,4 +30,8 @@ class LogAdapter : RecyclerViewAdapter<Log>() {
         val binding = ItemLogBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
+
+    fun addLog(log: Log) {
+        getListData().add(log)
+    }
 }
