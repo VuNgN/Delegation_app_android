@@ -39,7 +39,7 @@ class GrantStateFragment : Fragment() {
 
     private fun setupUi() {
         val items = arrayOf("Item 1", "Item 2", "Item 3")
-        val logs = getLogs()
+        val logs = mutableListOf<Log>()
         val adapter = LogAdapter()
         adapter.setListData(logs)
         binding.apply {
@@ -61,14 +61,4 @@ class GrantStateFragment : Fragment() {
             }
         }
     }
-
-    private fun getLogs() = listOf(
-        Log("Hello would", true),
-        Log("Oh, hi!", false),
-        Log(
-            "Exception: java.lang.NullPointerException: Parameter specified as non-null is null: method kotlin.jvm.internal.Intrinsics.checkNotNullParameter, parameter title",
-            false
-        ),
-        Log("Oh, hi!", false),
-    )
 }

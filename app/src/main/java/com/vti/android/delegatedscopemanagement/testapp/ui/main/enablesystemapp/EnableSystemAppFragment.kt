@@ -31,7 +31,7 @@ class EnableSystemAppFragment : Fragment() {
     }
 
     private fun setupUi() {
-        val logs = getLogs()
+        val logs = mutableListOf<Log>()
         val adapter = LogAdapter()
         adapter.setListData(logs)
         binding.apply {
@@ -39,16 +39,6 @@ class EnableSystemAppFragment : Fragment() {
             recyclerView.layoutManager = LinearLayoutManager(requireContext())
         }
     }
-
-    private fun getLogs() = listOf(
-        Log("Hello would", true),
-        Log("Oh, hi!", false),
-        Log(
-            "Exception: java.lang.NullPointerException: Parameter specified as non-null is null: method kotlin.jvm.internal.Intrinsics.checkNotNullParameter, parameter title",
-            false
-        ),
-        Log("Oh, hi!", false),
-    )
 
     private fun handleEvent() {
         binding.apply {
