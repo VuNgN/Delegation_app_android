@@ -5,14 +5,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.vti.android.delegatedscopemanagement.testapp.common.adapter.LogAdapter
 import com.vti.android.delegatedscopemanagement.testapp.common.adapter.data.Log
+import com.vti.android.delegatedscopemanagement.testapp.common.layoutmanager.CustomLinearLayoutManager
 import com.vti.android.delegatedscopemanagement.testapp.databinding.FragmentRestrictBinding
+import com.vti.android.delegatedscopemanagement.testapp.ui.main.restriction.contract.RestrictViewModel
+import com.vti.android.delegatedscopemanagement.testapp.ui.main.restriction.contract.impl.RestrictViewModelImpl
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class RestrictFragment : Fragment() {
     private lateinit var binding: FragmentRestrictBinding
+    private val vm: RestrictViewModel by viewModels<RestrictViewModelImpl>()
+    private lateinit var adapter: LogAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -21,6 +28,7 @@ class RestrictFragment : Fragment() {
         // Inflate the layout for this fragment
         return FragmentRestrictBinding.inflate(inflater, container, false).also {
             binding = it
+            binding.vm = vm
         }.root
     }
 
@@ -31,12 +39,13 @@ class RestrictFragment : Fragment() {
     }
 
     private fun setupUi() {
+        vm.getStatus()
         val logs = mutableListOf<Log>()
-        val adapter = LogAdapter()
+        adapter = LogAdapter()
         adapter.setListData(logs)
         binding.apply {
             recyclerView.adapter = adapter
-            recyclerView.layoutManager = LinearLayoutManager(requireContext())
+            recyclerView.layoutManager = CustomLinearLayoutManager(requireContext())
         }
     }
 
@@ -44,6 +53,21 @@ class RestrictFragment : Fragment() {
         binding.apply {
             topAppBar.setNavigationOnClickListener {
                 findNavController().popBackStack()
+            }
+        }
+        vm.apply {
+            isEditBookmarksEnable().observe(viewLifecycleOwner) { isChecked ->
+                binding.editBookmarks.isChecked = isChecked
+                restrict()
+            }
+            isIncognitoEnable().observe(viewLifecycleOwner) { isChecked ->
+                binding.incognito.isChecked = isChecked
+                restrict()
+            }
+            log().observe(viewLifecycleOwner) { log ->
+                adapter.addLog(log)
+                adapter.notifyItemChanged(adapter.itemCount)
+                binding.recyclerView.smoothScrollToPosition(adapter.itemCount)
             }
         }
     }
