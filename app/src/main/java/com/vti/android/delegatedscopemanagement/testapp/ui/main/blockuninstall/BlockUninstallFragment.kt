@@ -5,14 +5,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.vti.android.delegatedscopemanagement.testapp.common.adapter.LogAdapter
 import com.vti.android.delegatedscopemanagement.testapp.common.adapter.data.Log
 import com.vti.android.delegatedscopemanagement.testapp.databinding.FragmentBlockUninstallBinding
+import com.vti.android.delegatedscopemanagement.testapp.ui.main.blockuninstall.contract.BlockUninstallViewModel
+import com.vti.android.delegatedscopemanagement.testapp.ui.main.blockuninstall.contract.impl.BlockUninstallViewModelImpl
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class BlockUninstallFragment : Fragment() {
     private lateinit var binding: FragmentBlockUninstallBinding
+    private val vm: BlockUninstallViewModel by viewModels<BlockUninstallViewModelImpl>()
+    private lateinit var adapter: LogAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -21,6 +28,8 @@ class BlockUninstallFragment : Fragment() {
         // Inflate the layout for this fragment
         return FragmentBlockUninstallBinding.inflate(inflater, container, false).also {
             binding = it
+            binding.vm = vm
+            binding.lifecycleOwner = this
         }.root
     }
 
@@ -30,9 +39,14 @@ class BlockUninstallFragment : Fragment() {
         handleEvent()
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding.unbind()
+    }
+
     private fun setupUi() {
         val logs = mutableListOf<Log>()
-        val adapter = LogAdapter()
+        adapter = LogAdapter()
         adapter.setListData(logs)
         binding.apply {
             recyclerView.adapter = adapter
@@ -46,8 +60,16 @@ class BlockUninstallFragment : Fragment() {
                 findNavController().popBackStack()
             }
             textField.setEndIconOnClickListener {
-                android.util.Log.d("", "handleEvent: +${textField.editText?.text}")
+                vm?.blockUninstall()
             }
+        }
+        vm.log().observe(viewLifecycleOwner) { log ->
+            adapter.addLog(log)
+            adapter.notifyItemChanged(adapter.itemCount)
+            binding.recyclerView.smoothScrollToPosition(adapter.itemCount)
+        }
+        vm.packageName().observe(viewLifecycleOwner) {
+            vm.getBlockUninstall()
         }
     }
 }

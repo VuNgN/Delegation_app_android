@@ -1,73 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:context=".ui.main.blockuninstall.BlockUninstallFragment">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appBarLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fitsSystemWindows="true"
-        app:elevation="0dp">
+    <data>
 
-        <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/collapsingToolbar"
-            style="@style/Widget.App.CollapsingToolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/collapsingToolbarLayoutLargeSize">
+        <variable
+            name="vm"
+            type="com.vti.android.delegatedscopemanagement.testapp.ui.main.blockuninstall.contract.BlockUninstallViewModel" />
+    </data>
 
-            <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/topAppBar"
-                style="@style/Widget.App.Toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:navigationIcon="@drawable/ic_round_arrow_back_24"
-                app:title="Block uninstall" />
-
-        </com.google.android.material.appbar.CollapsingToolbarLayout>
-
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <LinearLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="20dp"
-        android:orientation="vertical"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        android:fitsSystemWindows="true"
+        tools:context=".ui.main.blockuninstall.BlockUninstallFragment">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textField"
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="12dp"
-            android:hint="@string/package_name"
-            app:endIconDrawable="@drawable/ic_round_send_24"
-            app:endIconMode="custom"
-            app:helperText="@string/bu_helper_text"
-            app:helperTextEnabled="true">
+            android:fitsSystemWindows="true"
+            app:elevation="0dp">
 
-            <com.google.android.material.textfield.TextInputEditText
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/collapsingToolbar"
+                style="@style/Widget.App.CollapsingToolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/collapsingToolbarLayoutLargeSize">
+
+                <com.google.android.material.appbar.MaterialToolbar
+                    android:id="@+id/topAppBar"
+                    style="@style/Widget.App.Toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    app:navigationIcon="@drawable/ic_round_arrow_back_24"
+                    app:title="Block uninstall" />
+
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textField"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:imeOptions="actionDone"
-                android:inputType="text"
-                android:lines="1"
-                android:maxLines="1" />
+                android:layout_marginHorizontal="12dp"
+                android:hint="@string/package_name"
+                app:endIcon="@{vm.isBlocked()}"
+                app:endIconMode="custom"
+                app:helperText="@string/bu_helper_text"
+                app:helperTextEnabled="true">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/textInputEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:imeOptions="actionDone"
+                    android:inputType="text"
+                    android:lines="1"
+                    android:maxLines="1"
+                    android:text="@={vm.packageName()}" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="40dp"
-            android:layout_weight="1"
-            tools:listitem="@layout/item_log" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-    </LinearLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="40dp"
+                android:layout_weight="1"
+                tools:listitem="@layout/item_log" />
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+        </LinearLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>
