@@ -1,5 +1,7 @@
 package com.vti.android.delegatedscopemanagement.testapp.ui.main.permission.grantstate
 
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,14 +12,17 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.vti.android.delegatedscopemanagement.testapp.common.adapter.LogAdapter
 import com.vti.android.delegatedscopemanagement.testapp.common.adapter.data.Log
 import com.vti.android.delegatedscopemanagement.testapp.databinding.FragmentGrantStateBinding
+import com.vti.android.delegatedscopemanagement.testapp.ui.main.permission.data.GrantState
 import com.vti.android.delegatedscopemanagement.testapp.ui.main.permission.grantstate.contract.GrantStateViewModel
 import com.vti.android.delegatedscopemanagement.testapp.ui.main.permission.grantstate.contract.impl.GrantStateViewModelImpl
 import dagger.hilt.android.AndroidEntryPoint
+
 
 @AndroidEntryPoint
 class GrantStateFragment : Fragment() {
     private lateinit var binding: FragmentGrantStateBinding
     private val vm: GrantStateViewModel by viewModels<GrantStateViewModelImpl>()
+    private lateinit var adapter: LogAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,12 +43,12 @@ class GrantStateFragment : Fragment() {
     }
 
     private fun setupUi() {
-        val items = arrayOf("Item 1", "Item 2", "Item 3")
         val logs = mutableListOf<Log>()
-        val adapter = LogAdapter()
+        adapter = LogAdapter()
         adapter.setListData(logs)
         binding.apply {
-            autoCompleteTextView.setSimpleItems(items)
+            packageNameTextField.setSimpleItems(getInstalledPackageName())
+            autoCompleteTextView.setSimpleItems(getPermission())
             recyclerView.adapter = adapter
             recyclerView.layoutManager = LinearLayoutManager(requireContext())
         }
@@ -51,14 +56,74 @@ class GrantStateFragment : Fragment() {
 
     private fun handleEvent() {
         binding.apply {
-            textInputEditText.setOnFocusChangeListener { _, hasFocus ->
+            packageNameTextField.setOnFocusChangeListener { _, hasFocus ->
                 when (hasFocus) {
                     true -> {}
                     false -> {
-                        //TODO: list all permissions of inserted package name
+                        autoCompleteTextView.setSimpleItems(getPermission())
                     }
                 }
             }
+            defaultButton.setOnClickListener {
+                vm?.grantState()?.postValue(GrantState.DEFAULT)
+            }
+            grantButton.setOnClickListener {
+                vm?.grantState()?.postValue(GrantState.GRANT)
+            }
+            denyButton.setOnClickListener {
+                vm?.grantState()?.postValue(GrantState.DENY)
+            }
         }
+        vm.grantState().observe(viewLifecycleOwner) {
+            vm.setPermission()
+        }
+        vm.log().observe(viewLifecycleOwner) { log ->
+            adapter.addLog(log)
+            adapter.notifyItemChanged(adapter.itemCount)
+            binding.recyclerView.smoothScrollToPosition(adapter.itemCount)
+        }
+    }
+
+    private fun getPermission(): Array<String> {
+        val p = requireContext().packageManager
+        val appInstall = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            p.getInstalledPackages(PackageManager.PackageInfoFlags.of(PackageManager.GET_PERMISSIONS.toLong()))
+        } else {
+            @Suppress("DEPRECATION")
+            p.getInstalledPackages(PackageManager.GET_PERMISSIONS)
+        }
+        for (pInfo in appInstall) {
+            if (pInfo.packageName.equals(vm.packageName().value)) {
+                val reqPermission = pInfo.requestedPermissions
+                android.util.Log.d(TAG, "getPermission: package name -> ${pInfo.packageName}")
+                for (permission in reqPermission) {
+                    android.util.Log.d(TAG, "getPermission: Permission list -> $permission")
+                }
+                return reqPermission
+            }
+        }
+        return arrayOf()
+    }
+
+    private fun getInstalledPackageName(): Array<String> {
+        val packageNames = mutableListOf<String>()
+        val appInstall = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            requireContext().packageManager.getInstalledPackages(
+                PackageManager.PackageInfoFlags.of(
+                    PackageManager.GET_PERMISSIONS.toLong()
+                )
+            )
+        } else {
+            @Suppress("DEPRECATION")
+            requireContext().packageManager.getInstalledPackages(PackageManager.GET_PERMISSIONS)
+        }
+        for (pInfo in appInstall) {
+            packageNames.add(pInfo.packageName)
+        }
+        return packageNames.toTypedArray()
+    }
+
+    companion object {
+        private val TAG = GrantStateFragment::class.simpleName
     }
 }

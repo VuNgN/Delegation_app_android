@@ -35,6 +35,12 @@ class MenuFragment : Fragment() {
     private val receiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
             requireActivity().runOnUiThread {
+                val bundle = intent?.extras
+                if (bundle != null) {
+                    for (key in bundle.keySet()) {
+                        Log.d(TAG, "onReceive: key -> $key")
+                    }
+                }
                 Log.d(TAG, "onReceive: ${intent?.action}")
                 val scopes: ArrayList<String>? =
                     intent?.getStringArrayListExtra(DevicePolicyManager.EXTRA_DELEGATION_SCOPES)

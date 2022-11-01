@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:paddingHorizontal="12dp"
-        app:checkedButton="@id/prompt"
+        app:checkedButton="@id/default_button"
         app:selectionRequired="true"
         app:singleSelection="true">
 
@@ -24,7 +24,7 @@
             android:text="@string/auto_grant" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/prompt"
+            android:id="@+id/default_button"
             style="?attr/materialButtonOutlinedStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
