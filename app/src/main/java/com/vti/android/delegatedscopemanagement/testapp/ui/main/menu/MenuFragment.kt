@@ -93,7 +93,8 @@ class MenuFragment : Fragment() {
             ScopeType.DELEGATION_PACKAGE_ACCESS -> goto(MenuFragmentDirections.actionMenuFragmentToPackageAccessFragment())
             ScopeType.DELEGATION_ENABLE_SYSTEM_APP -> goto(MenuFragmentDirections.actionMenuFragmentToEnableSystemAppFragment())
             ScopeType.DELEGATION_PACKAGE_MANAGEMENT -> goto(MenuFragmentDirections.actionMenuFragmentToPackageManageFragment())
-            ScopeType.DELEGATION_LOGGING -> goto(MenuFragmentDirections.actionMenuFragmentToLoggingFragment())
+            ScopeType.DELEGATION_SECURITY_LOGGING -> goto(MenuFragmentDirections.actionMenuFragmentToSecurityLogsFragment())
+            ScopeType.DELEGATION_NETWORK_LOGGING -> goto(MenuFragmentDirections.actionMenuFragmentToNetworkingLogsFragment())
         }
     }
 
@@ -149,12 +150,16 @@ class MenuFragment : Fragment() {
             ) else false
         ),
         ScopeData(
-            "Logging",
+            "Networking logs",
             ContextCompat.getDrawable(requireActivity(), R.drawable.ic_round_rss_feed_24)!!,
-            ScopeType.DELEGATION_LOGGING,
-            if (VERSION.SDK_INT >= VERSION_CODES.S) scopes.contains(DevicePolicyManager.DELEGATION_NETWORK_LOGGING) || scopes.contains(
-                DevicePolicyManager.DELEGATION_SECURITY_LOGGING
-            ) else false
+            ScopeType.DELEGATION_NETWORK_LOGGING,
+            if (VERSION.SDK_INT >= VERSION_CODES.S) scopes.contains(DevicePolicyManager.DELEGATION_NETWORK_LOGGING) else false
+        ),
+        ScopeData(
+            "Security logs",
+            ContextCompat.getDrawable(requireActivity(), R.drawable.ic_round_security_24)!!,
+            ScopeType.DELEGATION_SECURITY_LOGGING,
+            if (VERSION.SDK_INT >= VERSION_CODES.S) scopes.contains(DevicePolicyManager.DELEGATION_SECURITY_LOGGING) else false
         ),
     )
 

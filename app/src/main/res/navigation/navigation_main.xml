@@ -65,8 +65,15 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
         <action
-            android:id="@+id/action_menuFragment_to_loggingFragment"
-            app:destination="@id/loggingFragment"
+            android:id="@+id/action_menuFragment_to_securityLogsFragment"
+            app:destination="@id/securityLogsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_menuFragment_to_networkingLogsFragment"
+            app:destination="@id/networkingLogsFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
@@ -83,10 +90,10 @@
         android:label="fragment_enable_system_app"
         tools:layout="@layout/fragment_enable_system_app" />
     <fragment
-        android:id="@+id/loggingFragment"
-        android:name="com.vti.android.delegatedscopemanagement.testapp.ui.main.logging.LoggingFragment"
+        android:id="@+id/securityLogsFragment"
+        android:name="com.vti.android.delegatedscopemanagement.testapp.ui.main.securitylogs.SecurityLogsFragment"
         android:label="fragment_logging"
-        tools:layout="@layout/fragment_logging" />
+        tools:layout="@layout/fragment_security_logs" />
     <fragment
         android:id="@+id/packageAccessFragment"
         android:name="com.vti.android.delegatedscopemanagement.testapp.ui.main.packageaccess.PackageAccessFragment"
@@ -132,4 +139,9 @@
         android:name="com.vti.android.delegatedscopemanagement.testapp.ui.main.permission.policy.PolicyFragment"
         android:label="fragment_policy"
         tools:layout="@layout/fragment_policy" />
+    <fragment
+        android:id="@+id/networkingLogsFragment"
+        android:name="com.vti.android.delegatedscopemanagement.testapp.ui.main.networkinglogs.NetworkingLogsFragment"
+        android:label="fragment_networking_logs"
+        tools:layout="@layout/fragment_networking_logs" />
 </navigation>
