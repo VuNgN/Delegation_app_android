@@ -6,9 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.vti.android.delegatedscopemanagement.testapp.common.adapter.LogAdapter
 import com.vti.android.delegatedscopemanagement.testapp.common.adapter.data.Log
+import com.vti.android.delegatedscopemanagement.testapp.common.layoutmanager.CustomLinearLayoutManager
 import com.vti.android.delegatedscopemanagement.testapp.databinding.FragmentPolicyBinding
 import com.vti.android.delegatedscopemanagement.testapp.ui.main.permission.policy.contract.PolicyViewModel
 import com.vti.android.delegatedscopemanagement.testapp.ui.main.permission.policy.contract.impl.PolicyViewModelImpl
@@ -42,7 +42,7 @@ class PolicyFragment : Fragment() {
         adapter.setListData(logs)
         binding.apply {
             recyclerView.adapter = adapter
-            recyclerView.layoutManager = LinearLayoutManager(requireContext())
+            recyclerView.layoutManager = CustomLinearLayoutManager(requireContext())
         }
     }
 

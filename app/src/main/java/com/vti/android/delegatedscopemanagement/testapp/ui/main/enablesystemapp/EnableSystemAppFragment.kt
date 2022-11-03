@@ -7,9 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.vti.android.delegatedscopemanagement.testapp.common.adapter.LogAdapter
 import com.vti.android.delegatedscopemanagement.testapp.common.adapter.data.Log
+import com.vti.android.delegatedscopemanagement.testapp.common.layoutmanager.CustomLinearLayoutManager
 import com.vti.android.delegatedscopemanagement.testapp.databinding.FragmentEnableSystemAppBinding
 import com.vti.android.delegatedscopemanagement.testapp.ui.main.enablesystemapp.contract.EnableSystemAppViewModel
 import com.vti.android.delegatedscopemanagement.testapp.ui.main.enablesystemapp.contract.impl.EnableSystemAppViewModelImpl
@@ -22,8 +22,7 @@ class EnableSystemAppFragment : Fragment() {
     private lateinit var adapter: LogAdapter
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
         return FragmentEnableSystemAppBinding.inflate(inflater, container, false).also {
@@ -44,7 +43,7 @@ class EnableSystemAppFragment : Fragment() {
         adapter.setListData(logs)
         binding.apply {
             recyclerView.adapter = adapter
-            recyclerView.layoutManager = LinearLayoutManager(requireContext())
+            recyclerView.layoutManager = CustomLinearLayoutManager(requireContext())
         }
     }
 

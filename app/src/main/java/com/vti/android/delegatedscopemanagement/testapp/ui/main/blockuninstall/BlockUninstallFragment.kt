@@ -7,9 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.vti.android.delegatedscopemanagement.testapp.common.adapter.LogAdapter
 import com.vti.android.delegatedscopemanagement.testapp.common.adapter.data.Log
+import com.vti.android.delegatedscopemanagement.testapp.common.layoutmanager.CustomLinearLayoutManager
 import com.vti.android.delegatedscopemanagement.testapp.databinding.FragmentBlockUninstallBinding
 import com.vti.android.delegatedscopemanagement.testapp.ui.main.blockuninstall.contract.BlockUninstallViewModel
 import com.vti.android.delegatedscopemanagement.testapp.ui.main.blockuninstall.contract.impl.BlockUninstallViewModelImpl
@@ -22,8 +22,7 @@ class BlockUninstallFragment : Fragment() {
     private lateinit var adapter: LogAdapter
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
         return FragmentBlockUninstallBinding.inflate(inflater, container, false).also {
@@ -50,7 +49,7 @@ class BlockUninstallFragment : Fragment() {
         adapter.setListData(logs)
         binding.apply {
             recyclerView.adapter = adapter
-            recyclerView.layoutManager = LinearLayoutManager(requireContext())
+            recyclerView.layoutManager = CustomLinearLayoutManager(requireContext())
         }
     }
 

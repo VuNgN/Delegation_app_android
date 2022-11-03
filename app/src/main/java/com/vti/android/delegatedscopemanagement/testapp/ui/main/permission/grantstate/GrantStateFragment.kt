@@ -8,9 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.vti.android.delegatedscopemanagement.testapp.common.adapter.LogAdapter
 import com.vti.android.delegatedscopemanagement.testapp.common.adapter.data.Log
+import com.vti.android.delegatedscopemanagement.testapp.common.layoutmanager.CustomLinearLayoutManager
 import com.vti.android.delegatedscopemanagement.testapp.databinding.FragmentGrantStateBinding
 import com.vti.android.delegatedscopemanagement.testapp.ui.main.permission.data.GrantState
 import com.vti.android.delegatedscopemanagement.testapp.ui.main.permission.grantstate.contract.GrantStateViewModel
@@ -25,8 +25,7 @@ class GrantStateFragment : Fragment() {
     private lateinit var adapter: LogAdapter
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
         return FragmentGrantStateBinding.inflate(inflater, container, false).also {
@@ -50,7 +49,7 @@ class GrantStateFragment : Fragment() {
             packageNameTextField.setSimpleItems(getInstalledPackageName())
             autoCompleteTextView.setSimpleItems(getPermission())
             recyclerView.adapter = adapter
-            recyclerView.layoutManager = LinearLayoutManager(requireContext())
+            recyclerView.layoutManager = CustomLinearLayoutManager(requireContext())
         }
     }
 
@@ -89,8 +88,7 @@ class GrantStateFragment : Fragment() {
         val appInstall = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             p.getInstalledPackages(PackageManager.PackageInfoFlags.of(PackageManager.GET_PERMISSIONS.toLong()))
         } else {
-            @Suppress("DEPRECATION")
-            p.getInstalledPackages(PackageManager.GET_PERMISSIONS)
+            @Suppress("DEPRECATION") p.getInstalledPackages(PackageManager.GET_PERMISSIONS)
         }
         for (pInfo in appInstall) {
             if (pInfo.packageName.equals(vm.packageName().value)) {
@@ -114,8 +112,9 @@ class GrantStateFragment : Fragment() {
                 )
             )
         } else {
-            @Suppress("DEPRECATION")
-            requireContext().packageManager.getInstalledPackages(PackageManager.GET_PERMISSIONS)
+            @Suppress("DEPRECATION") requireContext().packageManager.getInstalledPackages(
+                PackageManager.GET_PERMISSIONS
+            )
         }
         for (pInfo in appInstall) {
             packageNames.add(pInfo.packageName)

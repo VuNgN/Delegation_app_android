@@ -9,9 +9,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.vti.android.delegatedscopemanagement.testapp.common.adapter.LogAdapter
 import com.vti.android.delegatedscopemanagement.testapp.common.adapter.data.Log
+import com.vti.android.delegatedscopemanagement.testapp.common.layoutmanager.CustomLinearLayoutManager
 import com.vti.android.delegatedscopemanagement.testapp.databinding.FragmentPackageAccessBinding
 import com.vti.android.delegatedscopemanagement.testapp.ui.main.packageaccess.contract.PackageAccessViewModel
 import com.vti.android.delegatedscopemanagement.testapp.ui.main.packageaccess.contract.impl.PackageAccessViewModelImpl
@@ -24,8 +24,7 @@ class PackageAccessFragment : Fragment() {
     private lateinit var adapter: LogAdapter
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
         return FragmentPackageAccessBinding.inflate(inflater, container, false).also {
@@ -47,7 +46,7 @@ class PackageAccessFragment : Fragment() {
         binding.apply {
             packageNameTextField.setSimpleItems(getInstalledPackageName())
             recyclerView.adapter = adapter
-            recyclerView.layoutManager = LinearLayoutManager(requireContext())
+            recyclerView.layoutManager = CustomLinearLayoutManager(requireContext())
         }
     }
 
@@ -73,8 +72,9 @@ class PackageAccessFragment : Fragment() {
                 )
             )
         } else {
-            @Suppress("DEPRECATION")
-            requireContext().packageManager.getInstalledPackages(PackageManager.GET_PERMISSIONS)
+            @Suppress("DEPRECATION") requireContext().packageManager.getInstalledPackages(
+                PackageManager.GET_PERMISSIONS
+            )
         }
         for (pInfo in appInstall) {
             packageNames.add(pInfo.packageName)
