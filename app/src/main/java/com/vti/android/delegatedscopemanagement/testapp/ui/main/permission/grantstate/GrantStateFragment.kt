@@ -94,10 +94,12 @@ class GrantStateFragment : Fragment() {
             if (pInfo.packageName.equals(vm.packageName().value)) {
                 val reqPermission = pInfo.requestedPermissions
                 android.util.Log.d(TAG, "getPermission: package name -> ${pInfo.packageName}")
-                for (permission in reqPermission) {
-                    android.util.Log.d(TAG, "getPermission: Permission list -> $permission")
+                if (reqPermission != null) {
+                    for (permission in reqPermission) {
+                        android.util.Log.d(TAG, "getPermission: Permission list -> $permission")
+                    }
+                    return reqPermission
                 }
-                return reqPermission
             }
         }
         return arrayOf()
