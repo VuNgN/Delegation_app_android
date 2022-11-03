@@ -29,4 +29,5 @@
     <string name="uri">Uri</string>
     <string name="esa_helper_text">Press SEND button to Enable app</string>
     <string name="bu_helper_text">Press SEND button to Block</string>
+    <string name="network_logging">Network logging</string>
 </resources>

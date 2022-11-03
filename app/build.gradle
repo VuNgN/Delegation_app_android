@@ -11,7 +11,7 @@ android {
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.vti.android.delegatedscopemanagement.testapp.new"
+        applicationId "com.vti.android.delegatedscopemanagement.testapp.new.v1"
         minSdk 26
         targetSdk 33
         versionCode 1
