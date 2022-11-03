@@ -111,4 +111,12 @@ public class DelegateDevicePolicyManager {
     public boolean isEnableNetworkLogging() {
         return devicePolicyManager.isNetworkLoggingEnabled(null);
     }
+
+    public void enableSecurityLogging(Boolean isEnable) {
+        devicePolicyManager.setSecurityLoggingEnabled(null, isEnable);
+    }
+
+    public boolean isSecurityLogging() {
+        return devicePolicyManager.isSecurityLoggingEnabled(null);
+    }
 }

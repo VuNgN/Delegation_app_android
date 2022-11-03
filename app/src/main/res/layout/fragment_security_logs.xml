@@ -1,43 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:context=".ui.main.securitylogs.SecurityLogsFragment">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appBarLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fitsSystemWindows="true"
-        app:elevation="0dp">
+    <data>
 
-        <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/collapsingToolbar"
-            style="@style/Widget.App.CollapsingToolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/collapsingToolbarLayoutLargeSize">
+        <variable
+            name="vm"
+            type="com.vti.android.delegatedscopemanagement.testapp.ui.main.securitylogs.contract.SecurityLogsViewModel" />
+    </data>
 
-            <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/topAppBar"
-                style="@style/Widget.App.Toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:navigationIcon="@drawable/ic_round_arrow_back_24"
-                app:title="Security logs" />
-
-        </com.google.android.material.appbar.CollapsingToolbarLayout>
-
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <LinearLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        android:fitsSystemWindows="true"
+        tools:context=".ui.main.securitylogs.SecurityLogsFragment">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
+            app:elevation="0dp">
+
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/collapsingToolbar"
+                style="@style/Widget.App.CollapsingToolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/collapsingToolbarLayoutLargeSize">
+
+                <com.google.android.material.appbar.MaterialToolbar
+                    android:id="@+id/topAppBar"
+                    style="@style/Widget.App.Toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    app:navigationIcon="@drawable/ic_round_arrow_back_24"
+                    app:title="Security logs" />
+
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+        </com.google.android.material.appbar.AppBarLayout>
 
 
-    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical"
+            android:paddingHorizontal="12dp"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+            <com.google.android.material.materialswitch.MaterialSwitch
+                android:id="@+id/checkbox"
+                style="@style/Widget.App.CompoundButton.MaterialSwitch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checked="@{vm.isEnable()}"
+                android:onCheckedChanged="@{(_, isEnable) -> vm.enableSecurityLogging(isEnable)}"
+                android:text="@string/security_logging" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="20dp"
+                android:layout_weight="1"
+                tools:listitem="@layout/item_log" />
+
+        </LinearLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>
