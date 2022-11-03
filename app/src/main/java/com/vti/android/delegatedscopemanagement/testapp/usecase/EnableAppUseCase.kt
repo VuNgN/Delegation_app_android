@@ -1,6 +1,8 @@
 package com.vti.android.delegatedscopemanagement.testapp.usecase
 
 import android.app.admin.DevicePolicyManager
+import android.content.Intent
+import android.net.Uri
 import com.vungn.android.mybase.usecase.UseCase
 import javax.inject.Inject
 
@@ -11,6 +13,8 @@ class EnableAppUseCase @Inject constructor(private val devicePolicyManager: Devi
     }
 
     private fun enable(params: String): Int {
-        return 0
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(params))
+//        return devicePolicyManager.enableSystemApp(null, intent)
+        return 0;
     }
 }
