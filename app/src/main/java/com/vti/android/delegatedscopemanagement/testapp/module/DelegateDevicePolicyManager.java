@@ -80,6 +80,10 @@ public class DelegateDevicePolicyManager {
         return devicePolicyManager.setPermissionGrantState(null, applicationPermission.getPackageName(), applicationPermission.getPermission(), grantState);
     }
 
+    public void setPermissionPolicy(int policy) {
+        devicePolicyManager.setPermissionPolicy(null, policy);
+    }
+
     public boolean setApplicationHidden(String packageName, boolean isHide) {
         return devicePolicyManager.setApplicationHidden(null, packageName, isHide);
     }
