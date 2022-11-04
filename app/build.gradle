@@ -11,11 +11,11 @@ android {
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.vti.android.delegatedscopemanagement.testapp.new.v1"
+        applicationId "com.vti.android.delegatedscopemanagement.testapp"
         minSdk 26
         targetSdk 33
-        versionCode 1
-        versionName "1.0.$versionCode"
+        versionCode 20001
+        versionName "v2.0.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -24,6 +24,14 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    signingConfigs {
+        release {
+            storeFile file("delegateApp.jks")
+            keyAlias "delegate-app"
+            keyPassword "123456"
+            storePassword "123456"
         }
     }
     compileOptions {
