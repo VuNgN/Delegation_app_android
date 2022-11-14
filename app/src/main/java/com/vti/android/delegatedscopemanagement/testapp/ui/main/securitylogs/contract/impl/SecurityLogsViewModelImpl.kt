@@ -1,5 +1,8 @@
 package com.vti.android.delegatedscopemanagement.testapp.ui.main.securitylogs.contract.impl
 
+import android.app.admin.SecurityLog.SecurityEvent
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -9,6 +12,8 @@ import com.vti.android.delegatedscopemanagement.testapp.usecase.EnableSecurityLo
 import com.vti.android.delegatedscopemanagement.testapp.usecase.GetEnableSecurityLoggingUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
@@ -43,6 +48,29 @@ class SecurityLogsViewModelImpl @Inject constructor(
             } catch (e: Exception) {
                 android.util.Log.e(TAG, "getState: ${e.message}")
             }
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.P)
+    override fun pushLog(events: List<SecurityEvent>) {
+        events.forEach { event ->
+            val title =
+                "id: ${event.id}, log level: ${event.logLevel}, has data: ${event.data != null}, time: ${
+                    getDateTime(
+                        event.timeNanos
+                    )
+                }"
+            log.value = (Log(title, true))
+        }
+    }
+
+    private fun getDateTime(s: Long): String? {
+        return try {
+            val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
+            val netDate = Date(s * 1000)
+            sdf.format(netDate)
+        } catch (e: Exception) {
+            e.toString()
         }
     }
 
