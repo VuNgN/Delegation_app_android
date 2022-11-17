@@ -1,10 +1,16 @@
 package com.vti.android.delegatedscopemanagement.testapp.module;
 
 import android.app.admin.DevicePolicyManager;
+import android.app.admin.NetworkEvent;
+import android.app.admin.SecurityLog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
+
+import androidx.annotation.RequiresApi;
 
 import com.vti.android.delegatedscopemanagement.testapp.BuildConfig;
 import com.vti.android.delegatedscopemanagement.testapp.ui.main.permission.data.ApplicationPermission;
@@ -112,11 +118,42 @@ public class DelegateDevicePolicyManager {
         return devicePolicyManager.isNetworkLoggingEnabled(null);
     }
 
+    public List<NetworkEvent> retrieveNetworkLogs() {
+        int batchToken = 0;
+        List<NetworkEvent> result = null;
+        while (true) {
+            Log.d("", "retrieveNetworkLogs: token: " + batchToken);
+            List<NetworkEvent> newResult = devicePolicyManager.retrieveNetworkLogs(null, batchToken);
+            if (newResult != null) {
+                result = newResult;
+                Log.d("", "retrieveNetworkLogs: size: " + newResult.size());
+                StringBuilder builder = new StringBuilder();
+                for (NetworkEvent event : newResult) {
+                    builder.append("packageName:")
+                            .append(event.getPackageName());
+                }
+                Log.d("", "retrieveNetworkLogs: " + builder);
+            }
+            batchToken++;
+            if (result != null && newResult == null) {
+                return result;
+            }
+            if (batchToken >= 1000) {
+                return null;
+            }
+        }
+    }
+
     public void enableSecurityLogging(Boolean isEnable) {
         devicePolicyManager.setSecurityLoggingEnabled(null, isEnable);
     }
 
     public boolean isSecurityLogging() {
         return devicePolicyManager.isSecurityLoggingEnabled(null);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.Q)
+    public List<SecurityLog.SecurityEvent> retrieveSecurityLogs() {
+        return devicePolicyManager.retrieveSecurityLogs(null);
     }
 }

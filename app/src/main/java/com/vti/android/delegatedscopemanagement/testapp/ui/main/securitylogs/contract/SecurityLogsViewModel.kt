@@ -1,6 +1,5 @@
 package com.vti.android.delegatedscopemanagement.testapp.ui.main.securitylogs.contract
 
-import android.app.admin.SecurityLog.SecurityEvent
 import androidx.lifecycle.MutableLiveData
 import com.vti.android.delegatedscopemanagement.testapp.common.adapter.data.Log
 
@@ -9,5 +8,5 @@ interface SecurityLogsViewModel {
     fun isEnable(): MutableLiveData<Boolean>
     fun enableSecurityLogging(isEnable: Boolean)
     fun getState()
-    fun pushLog(events: List<SecurityEvent>)
+    fun retrieve()
 }

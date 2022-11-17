@@ -31,4 +31,6 @@
     <string name="bu_helper_text">Press SEND button to Block</string>
     <string name="network_logging">Network logging</string>
     <string name="security_logging">Security logging</string>
+    <string name="retrieve_logs">Retrieve logs</string>
+    <string name="call_1200_apis">Call 1200 apis</string>
 </resources>

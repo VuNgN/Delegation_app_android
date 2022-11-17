@@ -1,11 +1,9 @@
 package com.vti.android.delegatedscopemanagement.testapp.receiver
 
-import android.app.admin.DelegatedAdminReceiver
-import android.app.admin.DevicePolicyManager
+import android.app.admin.DeviceAdminReceiver
 import android.app.admin.DnsEvent
 import android.app.admin.NetworkEvent
 import android.app.admin.SecurityLog.SecurityEvent
-import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.os.Build
@@ -15,7 +13,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 @RequiresApi(Build.VERSION_CODES.Q)
-class AdminReceiver : DelegatedAdminReceiver() {
+class AdminReceiver : DeviceAdminReceiver() {
     override fun onNetworkLogsAvailable(
         context: Context,
         intent: Intent,
@@ -81,15 +79,15 @@ class AdminReceiver : DelegatedAdminReceiver() {
         }
     }
 
-    private fun getManager(context: Context): DevicePolicyManager {
-        return context.getSystemService(
-            Context.DEVICE_POLICY_SERVICE
-        ) as DevicePolicyManager
-    }
-
-    private fun getWho(context: Context): ComponentName {
-        return ComponentName(context, javaClass)
-    }
+//    private fun getManager(context: Context): DevicePolicyManager {
+//        return context.getSystemService(
+//            Context.DEVICE_POLICY_SERVICE
+//        ) as DevicePolicyManager
+//    }
+//
+//    private fun getWho(context: Context): ComponentName {
+//        return ComponentName(context, javaClass)
+//    }
 
     companion object {
         private val TAG = AdminReceiver::class.simpleName
