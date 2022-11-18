@@ -62,23 +62,19 @@ class NetworkingLogsViewModelImpl @Inject constructor(
     override fun retrieve() {
         viewModelScope.launch(Dispatchers.Main) {
             isLoading.value = true
-            launch(Dispatchers.Main) {
+            launch(Dispatchers.Main) RetrieveLog@{
                 try {
                     val events = withContext(Dispatchers.IO) {
                         retrieveNetworkLogUseCase.execute(Unit)
                     }
                     if (events == null) {
                         log.value = (Log("No logs!", true))
-                        return@launch
+                        return@RetrieveLog
                     }
                     events.forEach { event ->
-                        val title =
-                            "id: ${event.id}, " +
-                                    "package name: ${event.packageName}${
-                                        if (event is DnsEvent) ", " +
-                                                "hostname: ${event.hostname}" else ""
-                                    }, " +
-                                    "time: ${getDateTime(event.timestamp)}"
+                        val title = "id: ${event.id}, " + "package name: ${event.packageName}${
+                            if (event is DnsEvent) ", " + "hostname: ${event.hostname}" else ""
+                        }, " + "time: ${getDateTime(event.timestamp)}"
                         log.value = (Log(title, true))
                     }
                     android.util.Log.d(TAG, "retrieve: done")
@@ -96,16 +92,19 @@ class NetworkingLogsViewModelImpl @Inject constructor(
             launch {
                 val threadCount = 30
                 try {
-                    for (i in 1..threadCount) {
-                        launch(Dispatchers.IO) {
-                            val startTime = System.currentTimeMillis()
-                            logMakerUseCase.execute(numberOfApi / threadCount)
-                            android.util.Log.d(
-                                TAG,
-                                "retrieve: run time on $i: ${System.currentTimeMillis() - startTime}"
-                            )
+                    launch {
+                        for (i in 1..threadCount) {
+                            launch(Dispatchers.IO) {
+                                val startTime = System.currentTimeMillis()
+                                logMakerUseCase.execute(numberOfApi / threadCount)
+                                android.util.Log.d(
+                                    TAG,
+                                    "retrieve: run time on $i: ${System.currentTimeMillis() - startTime}"
+                                )
+                            }
                         }
-                    }
+                    }.join()
+                    log.value = (Log("Calling completed!", true))
                 } catch (e: Exception) {
                     log.postValue(Log(e.message.toString(), false))
                 }
