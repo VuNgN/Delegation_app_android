@@ -148,14 +148,6 @@ class MenuFragment : Fragment() {
             scopes.contains(DevicePolicyManager.DELEGATION_ENABLE_SYSTEM_APP)
         ),
         ScopeData(
-            "Package management",
-            ContextCompat.getDrawable(requireActivity(), R.drawable.ic_round_get_app_24)!!,
-            ScopeType.DELEGATION_PACKAGE_MANAGEMENT,
-            if (VERSION.SDK_INT >= VERSION_CODES.P) scopes.contains(DevicePolicyManager.DELEGATION_KEEP_UNINSTALLED_PACKAGES) || scopes.contains(
-                DevicePolicyManager.DELEGATION_INSTALL_EXISTING_PACKAGE
-            ) else false
-        ),
-        ScopeData(
             "Networking logs",
             ContextCompat.getDrawable(requireActivity(), R.drawable.ic_round_rss_feed_24)!!,
             ScopeType.DELEGATION_NETWORK_LOGGING,
