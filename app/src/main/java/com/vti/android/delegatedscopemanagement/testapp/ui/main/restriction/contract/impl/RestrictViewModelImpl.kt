@@ -18,13 +18,10 @@ class RestrictViewModelImpl @Inject constructor(
     private val restrictAppUseCase: RestrictAppUseCase
 ) : RestrictViewModel, ViewModel() {
     private val log: MutableLiveData<Log> = MutableLiveData()
-    private val isEnable: MutableLiveData<Boolean> = MutableLiveData(true)
     private val isIncognitoEnable: MutableLiveData<Boolean> = MutableLiveData()
     private val isEditBookmarksEnable: MutableLiveData<Boolean> = MutableLiveData()
 
     override fun log(): MutableLiveData<Log> = log
-
-    override fun isEnable(): MutableLiveData<Boolean> = isEnable
 
     override fun isIncognitoEnable(): MutableLiveData<Boolean> = isIncognitoEnable
 
@@ -66,9 +63,7 @@ class RestrictViewModelImpl @Inject constructor(
                         }
                     }
                 }
-                isEnable.postValue(true)
             } catch (e: java.lang.Exception) {
-                isEnable.postValue(false)
                 android.util.Log.e(TAG, "getStatus: ${e.message}")
             }
         }

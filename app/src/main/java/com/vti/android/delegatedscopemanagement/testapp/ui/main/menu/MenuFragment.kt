@@ -151,7 +151,7 @@ class MenuFragment : Fragment() {
             "Networking logs",
             ContextCompat.getDrawable(requireActivity(), R.drawable.ic_round_rss_feed_24)!!,
             ScopeType.DELEGATION_NETWORK_LOGGING,
-            if (VERSION.SDK_INT >= VERSION_CODES.S) scopes.contains(DevicePolicyManager.DELEGATION_NETWORK_LOGGING) else false
+            if (VERSION.SDK_INT >= VERSION_CODES.Q) scopes.contains(DevicePolicyManager.DELEGATION_NETWORK_LOGGING) else false
         ),
         ScopeData(
             "Security logs",
