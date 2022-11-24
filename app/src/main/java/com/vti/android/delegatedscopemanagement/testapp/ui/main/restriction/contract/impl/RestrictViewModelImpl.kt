@@ -18,23 +18,23 @@ class RestrictViewModelImpl @Inject constructor(
     private val restrictAppUseCase: RestrictAppUseCase
 ) : RestrictViewModel, ViewModel() {
     private val log: MutableLiveData<Log> = MutableLiveData()
-    private val isIncognitoEnable: MutableLiveData<Boolean> = MutableLiveData()
-    private val isEditBookmarksEnable: MutableLiveData<Boolean> = MutableLiveData()
+    private val isIncognitoDisable: MutableLiveData<Boolean> = MutableLiveData()
+    private val isEditBookmarksDisable: MutableLiveData<Boolean> = MutableLiveData()
 
     override fun log(): MutableLiveData<Log> = log
 
-    override fun isIncognitoEnable(): MutableLiveData<Boolean> = isIncognitoEnable
+    override fun isIncognitoDisable(): MutableLiveData<Boolean> = isIncognitoDisable
 
-    override fun isEditBookmarksEnable(): MutableLiveData<Boolean> = isEditBookmarksEnable
+    override fun isEditBookmarksDisable(): MutableLiveData<Boolean> = isEditBookmarksDisable
 
     override fun onChangeIncognitoMode(isChecked: Boolean) {
         android.util.Log.d(TAG, "onChangeIncognitoMode: ")
-        isIncognitoEnable.postValue(isChecked)
+        isIncognitoDisable.postValue(isChecked)
     }
 
     override fun onChangeEditBookmarks(isChecked: Boolean) {
         android.util.Log.d(TAG, "onChangeEditBookmarks: ")
-        isEditBookmarksEnable.postValue(isChecked)
+        isEditBookmarksDisable.postValue(isChecked)
     }
 
     override fun getStatus() {
@@ -48,18 +48,18 @@ class RestrictViewModelImpl @Inject constructor(
                                 TAG,
                                 "getStatus: INCOGNITO_MODE_KEY: ${bundle.getString(key)}"
                             )
-                            val value = bundle.getString(key) == "0"
-                            if (value) isIncognitoEnable.postValue(true)
-                            else isIncognitoEnable.postValue(false)
+                            val value = bundle.getString(key) == "1"
+                            if (value) isIncognitoDisable.postValue(true)
+                            else isIncognitoDisable.postValue(false)
                         }
                         EDIT_BOOKMARK_KEY -> {
                             android.util.Log.d(
                                 TAG,
                                 "getStatus: EDIT_BOOKMARK_KEY: ${bundle.getString(key)}"
                             )
-                            val value = bundle.getString(key) == "true"
-                            if (value) isEditBookmarksEnable.postValue(true)
-                            else isEditBookmarksEnable.postValue(false)
+                            val value = bundle.getString(key) == "false"
+                            if (value) isEditBookmarksDisable.postValue(true)
+                            else isEditBookmarksDisable.postValue(false)
                         }
                     }
                 }
@@ -74,11 +74,11 @@ class RestrictViewModelImpl @Inject constructor(
             val settings = Bundle()
             settings.putString(
                 INCOGNITO_MODE_KEY,
-                if (isIncognitoEnable.value == true) "0" else "1"
+                if (isIncognitoDisable.value == true) "1" else "0"
             )
             settings.putString(
                 EDIT_BOOKMARK_KEY,
-                if (isEditBookmarksEnable.value == true) "true" else "false"
+                if (isEditBookmarksDisable.value == true) "false" else "true"
             )
             try {
                 restrictAppUseCase.execute(settings)

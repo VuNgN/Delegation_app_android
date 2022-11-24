@@ -5,8 +5,8 @@ import com.vti.android.delegatedscopemanagement.testapp.common.adapter.data.Log
 
 interface RestrictViewModel {
     fun log(): MutableLiveData<Log>
-    fun isIncognitoEnable(): MutableLiveData<Boolean>
-    fun isEditBookmarksEnable(): MutableLiveData<Boolean>
+    fun isIncognitoDisable(): MutableLiveData<Boolean>
+    fun isEditBookmarksDisable(): MutableLiveData<Boolean>
     fun onChangeIncognitoMode(isChecked: Boolean)
     fun onChangeEditBookmarks(isChecked: Boolean)
     fun getStatus()

@@ -11,11 +11,11 @@ android {
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.vti.android.delegatedscopemanagement.testapp.new.v1"
+        applicationId "com.vti.android.delegatedscopemanagement.testapp"
         minSdk 26
         targetSdk 33
-        versionCode 20004
-        versionName "v2.0.2"
+        versionCode 1
+        versionName "v1.0.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

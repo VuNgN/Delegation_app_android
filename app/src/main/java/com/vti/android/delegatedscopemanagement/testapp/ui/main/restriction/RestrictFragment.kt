@@ -56,11 +56,11 @@ class RestrictFragment : Fragment() {
             }
         }
         vm.apply {
-            isEditBookmarksEnable().observe(viewLifecycleOwner) { isChecked ->
+            isEditBookmarksDisable().observe(viewLifecycleOwner) { isChecked ->
                 binding.editBookmarks.isChecked = isChecked
                 restrict()
             }
-            isIncognitoEnable().observe(viewLifecycleOwner) { isChecked ->
+            isIncognitoDisable().observe(viewLifecycleOwner) { isChecked ->
                 binding.incognito.isChecked = isChecked
                 restrict()
             }
