@@ -11,8 +11,8 @@
     <string name="button_cert_uninstall">Uninstall \'Example 1\' user CA cert</string>
     <string name="button_cert_uninstall_all">Uninstall all user CA certs</string>
     <string name="google_chrome">Google chrome</string>
-    <string name="restriction_incognito_mode">Incognito mode</string>
-    <string name="restriction_edit_bookmarks">Edit bookmarks</string>
+    <string name="restriction_incognito_mode">Disable incognito mode</string>
+    <string name="restriction_edit_bookmarks">Disable edit bookmarks</string>
     <string name="package_name">Package name</string>
     <string name="policy">Policy</string>
     <string name="grant_state">Grant state</string>
