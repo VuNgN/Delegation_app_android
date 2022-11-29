@@ -37,6 +37,7 @@ class SecurityLogsViewModelImpl @Inject constructor(
                 this@SecurityLogsViewModelImpl.isEnable.postValue(isEnable)
                 log.postValue(Log(if (isEnable) "Enabled" else "Disabled", true))
             } catch (e: Exception) {
+                this@SecurityLogsViewModelImpl.isEnable.postValue(false)
                 log.postValue(Log(e.message.toString(), false))
             }
         }

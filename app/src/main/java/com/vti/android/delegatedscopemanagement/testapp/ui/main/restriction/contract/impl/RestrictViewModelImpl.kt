@@ -28,13 +28,25 @@ class RestrictViewModelImpl @Inject constructor(
     override fun isEditBookmarksDisable(): MutableLiveData<Boolean> = isEditBookmarksDisable
 
     override fun onChangeIncognitoMode(isChecked: Boolean) {
-        android.util.Log.d(TAG, "onChangeIncognitoMode: ")
-        isIncognitoDisable.postValue(isChecked)
+        viewModelScope.launch {
+            try {
+                getRestrictStatus.execute(Unit)
+                isIncognitoDisable.postValue(isChecked)
+            } catch (e: Exception) {
+                isIncognitoDisable.postValue(false)
+            }
+        }
     }
 
     override fun onChangeEditBookmarks(isChecked: Boolean) {
-        android.util.Log.d(TAG, "onChangeEditBookmarks: ")
-        isEditBookmarksDisable.postValue(isChecked)
+        viewModelScope.launch {
+            try {
+                getRestrictStatus.execute(Unit)
+                isEditBookmarksDisable.postValue(isChecked)
+            } catch (e: Exception) {
+                isEditBookmarksDisable.postValue(false)
+            }
+        }
     }
 
     override fun getStatus() {

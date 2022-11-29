@@ -42,6 +42,7 @@ class NetworkingLogsViewModelImpl @Inject constructor(
                 this@NetworkingLogsViewModelImpl.isEnable.postValue(isEnable)
                 log.postValue(Log(if (isEnable) "Enabled" else "Disabled", true))
             } catch (e: Exception) {
+                this@NetworkingLogsViewModelImpl.isEnable.postValue(false)
                 log.postValue(Log(e.message.toString(), false))
             }
         }
