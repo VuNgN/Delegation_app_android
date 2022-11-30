@@ -35,4 +35,5 @@
     <string name="call_1200_apis">Call 1200 apis</string>
     <string name="is_enable_network_logging">Is enable network logging</string>
     <string name="is_enable_security_logging">Is enable security logging</string>
+    <string name="retrieve_pre_reboot_logs">Retrieve pre-reboot logs</string>
 </resources>

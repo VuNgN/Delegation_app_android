@@ -73,6 +73,13 @@
                 android:onClick="@{_ -> vm.retrieve()}"
                 android:text="@string/retrieve_logs" />
 
+            <Button
+                style="@style/Widget.App.Button.TextButton.Icon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="@{_ -> vm.retrievePreRebootSecurityLogs()}"
+                android:text="@string/retrieve_pre_reboot_logs" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView"
                 android:layout_width="match_parent"

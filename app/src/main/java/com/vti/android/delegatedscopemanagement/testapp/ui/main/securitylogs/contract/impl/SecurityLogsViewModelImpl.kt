@@ -11,6 +11,7 @@ import com.vti.android.delegatedscopemanagement.testapp.common.adapter.data.Secu
 import com.vti.android.delegatedscopemanagement.testapp.ui.main.securitylogs.contract.SecurityLogsViewModel
 import com.vti.android.delegatedscopemanagement.testapp.usecase.EnableSecurityLoggingUseCase
 import com.vti.android.delegatedscopemanagement.testapp.usecase.GetEnableSecurityLoggingUseCase
+import com.vti.android.delegatedscopemanagement.testapp.usecase.RetrievePreRebootSecurityLogsUseCase
 import com.vti.android.delegatedscopemanagement.testapp.usecase.RetrieveSecurityLogUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -22,7 +23,8 @@ import javax.inject.Inject
 class SecurityLogsViewModelImpl @Inject constructor(
     private val enableSecurityLoggingUseCase: EnableSecurityLoggingUseCase,
     private val getEnableSecurityLoggingUseCase: GetEnableSecurityLoggingUseCase,
-    private val retrieveSecurityLogUseCase: RetrieveSecurityLogUseCase
+    private val retrieveSecurityLogUseCase: RetrieveSecurityLogUseCase,
+    private val retrievePreRebootSecurityLogsUseCase: RetrievePreRebootSecurityLogsUseCase
 ) : SecurityLogsViewModel, ViewModel() {
     private val log: MutableLiveData<Log> = MutableLiveData()
     private val isEnable: MutableLiveData<Boolean> = MutableLiveData()
@@ -76,6 +78,7 @@ class SecurityLogsViewModelImpl @Inject constructor(
                     TAG,
                     "retrieveSecurityLogs(): Security logs size: ${events.size}"
                 )
+                log.value = (Log("--------------retrieveSecurityLogs()-------------", true))
                 events.forEach { event ->
                     val json = convertToJson(event.data)
                     val title =
@@ -84,6 +87,42 @@ class SecurityLogsViewModelImpl @Inject constructor(
                                 event.timeNanos
                             )
                         }"
+                    log.value = (Log(title, true))
+                }
+            } catch (e: SecurityException) {
+                log.postValue(Log(SecurityExceptionLog, false))
+            } catch (e: Exception) {
+                log.postValue(Log(e.message.toString(), false))
+            }
+        }
+    }
+
+    override fun retrievePreRebootSecurityLogs() {
+        viewModelScope.launch {
+            try {
+                val events = retrievePreRebootSecurityLogsUseCase.execute(Unit)
+                if (events == null) {
+                    log.value = (Log("retrievePreRebootSecurityLogs(): No logs!", true))
+                    return@launch
+                }
+                android.util.Log.d(
+                    TAG,
+                    "retrievePreRebootSecurityLogs(): Security logs size: ${events.size}"
+                )
+                log.value =
+                    (Log("--------------retrievePreRebootSecurityLogs()--------------", true))
+                events.forEach { event ->
+                    val json = convertToJson(event.data)
+                    val title =
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                            "id: ${event.id}, log level: ${event.logLevel}, data: $json, time: ${
+                                getDateTime(
+                                    event.timeNanos
+                                )
+                            }"
+                        } else {
+                            "data: $json, time: ${getDateTime(event.timeNanos)}"
+                        }
                     log.value = (Log(title, true))
                 }
             } catch (e: SecurityException) {

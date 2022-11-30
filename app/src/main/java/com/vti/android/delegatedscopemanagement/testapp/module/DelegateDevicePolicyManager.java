@@ -156,4 +156,8 @@ public class DelegateDevicePolicyManager {
     public List<SecurityLog.SecurityEvent> retrieveSecurityLogs() {
         return devicePolicyManager.retrieveSecurityLogs(null);
     }
+
+    public List<SecurityLog.SecurityEvent> retrievePreRebootSecurityLogs() {
+        return devicePolicyManager.retrievePreRebootSecurityLogs(null);
+    }
 }
