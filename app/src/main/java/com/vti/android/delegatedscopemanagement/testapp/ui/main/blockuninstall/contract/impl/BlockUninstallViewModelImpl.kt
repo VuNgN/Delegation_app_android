@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.vti.android.delegatedscopemanagement.testapp.common.adapter.data.Log
+import com.vti.android.delegatedscopemanagement.testapp.common.adapter.data.SecurityExceptionLog
 import com.vti.android.delegatedscopemanagement.testapp.ui.main.blockuninstall.contract.BlockUninstallViewModel
 import com.vti.android.delegatedscopemanagement.testapp.usecase.BlockUninstallUseCase
 import com.vti.android.delegatedscopemanagement.testapp.usecase.GetBlockUninstallUseCase
@@ -38,7 +39,9 @@ class BlockUninstallViewModelImpl @Inject constructor(
                     log.postValue(Log("Blocked", true))
                 }
                 getBlockUninstall()
-            } catch (e: java.lang.Exception) {
+            } catch (e: SecurityException) {
+                log.postValue(Log(SecurityExceptionLog, false))
+            } catch (e: Exception) {
                 log.postValue(Log(e.message.toString(), false))
             }
         }

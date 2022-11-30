@@ -33,4 +33,6 @@
     <string name="security_logging">Security logging</string>
     <string name="retrieve_logs">Retrieve logs</string>
     <string name="call_1200_apis">Call 1200 apis</string>
+    <string name="is_enable_network_logging">Is enable network logging</string>
+    <string name="is_enable_security_logging">Is enable security logging</string>
 </resources>

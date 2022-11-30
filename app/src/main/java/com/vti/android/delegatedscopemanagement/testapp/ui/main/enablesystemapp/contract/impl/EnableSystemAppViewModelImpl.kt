@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.vti.android.delegatedscopemanagement.testapp.common.adapter.data.Log
+import com.vti.android.delegatedscopemanagement.testapp.common.adapter.data.SecurityExceptionLog
 import com.vti.android.delegatedscopemanagement.testapp.ui.main.enablesystemapp.contract.EnableSystemAppViewModel
 import com.vti.android.delegatedscopemanagement.testapp.usecase.EnableAppUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -25,6 +26,8 @@ class EnableSystemAppViewModelImpl @Inject constructor(
             try {
                 val result = enableAppUseCase.execute(uri.value.toString())
                 log.postValue(Log("Enable system app with ${uri.value} uri -> $result", true))
+            } catch (e: SecurityException) {
+                log.postValue(Log(SecurityExceptionLog, false))
             } catch (e: Exception) {
                 log.postValue(Log(e.message.toString(), false))
             }

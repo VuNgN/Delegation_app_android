@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.gson.Gson
 import com.vti.android.delegatedscopemanagement.testapp.common.adapter.data.Log
+import com.vti.android.delegatedscopemanagement.testapp.common.adapter.data.SecurityExceptionLog
 import com.vti.android.delegatedscopemanagement.testapp.ui.main.securitylogs.contract.SecurityLogsViewModel
 import com.vti.android.delegatedscopemanagement.testapp.usecase.EnableSecurityLoggingUseCase
 import com.vti.android.delegatedscopemanagement.testapp.usecase.GetEnableSecurityLoggingUseCase
@@ -35,7 +36,15 @@ class SecurityLogsViewModelImpl @Inject constructor(
             try {
                 enableSecurityLoggingUseCase.execute(isEnable)
                 this@SecurityLogsViewModelImpl.isEnable.postValue(isEnable)
-                log.postValue(Log(if (isEnable) "Enabled" else "Disabled", true))
+                log.postValue(
+                    Log(
+                        "setSecurityLoggingEnabled(): ${if (isEnable) "Enabled" else "Disabled"}",
+                        true
+                    )
+                )
+            } catch (e: SecurityException) {
+                this@SecurityLogsViewModelImpl.isEnable.postValue(false)
+                log.postValue(Log(SecurityExceptionLog, false))
             } catch (e: Exception) {
                 this@SecurityLogsViewModelImpl.isEnable.postValue(false)
                 log.postValue(Log(e.message.toString(), false))
@@ -60,10 +69,13 @@ class SecurityLogsViewModelImpl @Inject constructor(
             try {
                 val events = retrieveSecurityLogUseCase.execute(Unit)
                 if (events == null) {
-                    log.value = (Log("No logs!", true))
+                    log.value = (Log("retrieveSecurityLogs(): No logs!", true))
                     return@launch
                 }
-                android.util.Log.d(TAG, "Security logs size: ${events.size}")
+                android.util.Log.d(
+                    TAG,
+                    "retrieveSecurityLogs(): Security logs size: ${events.size}"
+                )
                 events.forEach { event ->
                     val json = convertToJson(event.data)
                     val title =
@@ -74,6 +86,21 @@ class SecurityLogsViewModelImpl @Inject constructor(
                         }"
                     log.value = (Log(title, true))
                 }
+            } catch (e: SecurityException) {
+                log.postValue(Log(SecurityExceptionLog, false))
+            } catch (e: Exception) {
+                log.postValue(Log(e.message.toString(), false))
+            }
+        }
+    }
+
+    override fun getEnableState() {
+        viewModelScope.launch {
+            try {
+                val isEnable = getEnableSecurityLoggingUseCase.execute(Unit)
+                log.value = (Log("isNetworkLoggingEnabled(): $isEnable", true))
+            } catch (e: SecurityException) {
+                log.postValue(Log(SecurityExceptionLog, false))
             } catch (e: Exception) {
                 log.postValue(Log(e.message.toString(), false))
             }

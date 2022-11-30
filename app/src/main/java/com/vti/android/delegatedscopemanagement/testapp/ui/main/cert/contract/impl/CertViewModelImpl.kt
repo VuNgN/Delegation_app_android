@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.vti.android.delegatedscopemanagement.testapp.common.adapter.data.Log
+import com.vti.android.delegatedscopemanagement.testapp.common.adapter.data.SecurityExceptionLog
 import com.vti.android.delegatedscopemanagement.testapp.ui.main.cert.contract.CertViewModel
 import com.vti.android.delegatedscopemanagement.testapp.usecase.GetNumberOfCerts
 import com.vti.android.delegatedscopemanagement.testapp.usecase.InstallCertUseCase
@@ -28,9 +29,11 @@ class CertViewModelImpl @Inject constructor(
         viewModelScope.launch {
             try {
                 val number = getNumberOfCerts.execute(Unit)
-                val title = "Number of CA Cert: $number"
+                val title = "getInstalledCaCerts() -> Number of CA Cert: $number"
                 log.postValue(Log(title, true))
-            } catch (e: java.lang.Exception) {
+            } catch (e: SecurityException) {
+                log.postValue(Log(SecurityExceptionLog, false))
+            } catch (e: Exception) {
                 log.postValue(Log(e.message.toString(), false))
             }
         }
@@ -41,9 +44,11 @@ class CertViewModelImpl @Inject constructor(
             try {
                 val result = installCertUseCase.execute(Unit)
                 val title =
-                    "Install 'Example 1' CA Cert: ${if (result) "Installed" else "Something wrong"}"
+                    "installCaCert() -> Install 'Example 1' CA Cert: ${if (result) "Installed" else "Something wrong"}"
                 log.postValue(Log(title, true))
-            } catch (e: java.lang.Exception) {
+            } catch (e: SecurityException) {
+                log.postValue(Log(SecurityExceptionLog, false))
+            } catch (e: Exception) {
                 log.postValue(Log(e.message.toString(), false))
             }
         }
@@ -54,9 +59,11 @@ class CertViewModelImpl @Inject constructor(
             try {
                 val result = uninstallCertUseCase.execute(Unit)
                 val title =
-                    "Uninstall 'Example 1' CA Cert: ${if (result) "Uninstalled" else "Cert list is empty"}"
+                    "uninstallCaCert() -> Uninstall 'Example 1' CA Cert: ${if (result) "Uninstalled" else "Cert list is empty"}"
                 log.postValue(Log(title, true))
-            } catch (e: java.lang.Exception) {
+            } catch (e: SecurityException) {
+                log.postValue(Log(SecurityExceptionLog, false))
+            } catch (e: Exception) {
                 log.postValue(Log(e.message.toString(), false))
             }
         }
@@ -66,9 +73,11 @@ class CertViewModelImpl @Inject constructor(
         viewModelScope.launch {
             try {
                 uninstallAllCertUseCase.execute(Unit)
-                val title = "Uninstall all CA Cert: Uninstalled"
+                val title = "uninstallAllUserCaCerts() -> Uninstall all CA Cert: Uninstalled"
                 log.postValue(Log(title, true))
-            } catch (e: java.lang.Exception) {
+            } catch (e: SecurityException) {
+                log.postValue(Log(SecurityExceptionLog, false))
+            } catch (e: Exception) {
                 log.postValue(Log(e.message.toString(), false))
             }
         }

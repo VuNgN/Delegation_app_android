@@ -70,16 +70,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:enabled="@{!vm.isLoading()}"
-                android:onClick="@{_ -> vm.retrieve()}"
-                android:text="@string/retrieve_logs" />
+                android:onClick="@{_ -> vm.getEnableState()}"
+                android:text="@string/is_enable_network_logging" />
 
             <Button
                 style="@style/Widget.App.Button.TextButton.Icon"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:enabled="@{!vm.isLoading()}"
-                android:onClick="@{_ -> vm.callApis(1201)}"
-                android:text="@string/call_1200_apis" />
+                android:onClick="@{_ -> vm.retrieve()}"
+                android:text="@string/retrieve_logs" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView"

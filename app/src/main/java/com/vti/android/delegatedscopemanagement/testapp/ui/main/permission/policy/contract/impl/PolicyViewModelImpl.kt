@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.vti.android.delegatedscopemanagement.testapp.common.adapter.data.Log
+import com.vti.android.delegatedscopemanagement.testapp.common.adapter.data.SecurityExceptionLog
 import com.vti.android.delegatedscopemanagement.testapp.ui.main.permission.policy.contract.PolicyViewModel
 import com.vti.android.delegatedscopemanagement.testapp.usecase.SetPermissionPolicyUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -36,6 +37,8 @@ class PolicyViewModelImpl @Inject constructor(
             try {
                 setPermissionPolicyUseCase.execute(policy)
                 log.postValue(Log("Set permission policy success!", true))
+            } catch (e: SecurityException) {
+                log.postValue(Log(SecurityExceptionLog, false))
             } catch (e: Exception) {
                 log.postValue(Log(e.message.toString(), false))
             }

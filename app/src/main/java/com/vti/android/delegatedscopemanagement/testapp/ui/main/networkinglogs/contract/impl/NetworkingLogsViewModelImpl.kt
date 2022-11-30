@@ -7,10 +7,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.vti.android.delegatedscopemanagement.testapp.common.adapter.data.Log
+import com.vti.android.delegatedscopemanagement.testapp.common.adapter.data.SecurityExceptionLog
 import com.vti.android.delegatedscopemanagement.testapp.ui.main.networkinglogs.contract.NetworkingLogsViewModel
 import com.vti.android.delegatedscopemanagement.testapp.usecase.EnableNetworkLoggingUseCase
 import com.vti.android.delegatedscopemanagement.testapp.usecase.GetEnableNetworkLoggingUseCase
-import com.vti.android.delegatedscopemanagement.testapp.usecase.LogMakerUseCase
 import com.vti.android.delegatedscopemanagement.testapp.usecase.RetrieveNetworkLogUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -24,8 +24,7 @@ import javax.inject.Inject
 class NetworkingLogsViewModelImpl @Inject constructor(
     private val enableNetworkLoggingUseCase: EnableNetworkLoggingUseCase,
     private val getEnableNetworkLoggingUseCase: GetEnableNetworkLoggingUseCase,
-    private val retrieveNetworkLogUseCase: RetrieveNetworkLogUseCase,
-    private val logMakerUseCase: LogMakerUseCase
+    private val retrieveNetworkLogUseCase: RetrieveNetworkLogUseCase
 ) : NetworkingLogsViewModel, ViewModel() {
     private val log: MutableLiveData<Log> = MutableLiveData()
     private val isEnable: MutableLiveData<Boolean> = MutableLiveData()
@@ -40,7 +39,15 @@ class NetworkingLogsViewModelImpl @Inject constructor(
             try {
                 enableNetworkLoggingUseCase.execute(isEnable)
                 this@NetworkingLogsViewModelImpl.isEnable.postValue(isEnable)
-                log.postValue(Log(if (isEnable) "Enabled" else "Disabled", true))
+                log.postValue(
+                    Log(
+                        "setNetworkLoggingEnabled(): ${if (isEnable) "Enabled" else "Disabled"}",
+                        true
+                    )
+                )
+            } catch (e: SecurityException) {
+                this@NetworkingLogsViewModelImpl.isEnable.postValue(false)
+                log.postValue(Log(SecurityExceptionLog, false))
             } catch (e: Exception) {
                 this@NetworkingLogsViewModelImpl.isEnable.postValue(false)
                 log.postValue(Log(e.message.toString(), false))
@@ -69,7 +76,7 @@ class NetworkingLogsViewModelImpl @Inject constructor(
                         retrieveNetworkLogUseCase.execute(Unit)
                     }
                     if (events == null) {
-                        log.value = (Log("No logs!", true))
+                        log.value = (Log("retrieveNetworkLogs(): No logs!", true))
                         return@RetrieveLog
                     }
                     events.forEach { event ->
@@ -78,7 +85,9 @@ class NetworkingLogsViewModelImpl @Inject constructor(
                         }, " + "time: ${getDateTime(event.timestamp)}"
                         log.value = (Log(title, true))
                     }
-                    android.util.Log.d(TAG, "retrieve: done")
+                    android.util.Log.d(TAG, "retrieveNetworkLogs(): done")
+                } catch (e: SecurityException) {
+                    log.postValue(Log(SecurityExceptionLog, false))
                 } catch (e: Exception) {
                     log.postValue(Log(e.message.toString(), false))
                 }
@@ -87,30 +96,16 @@ class NetworkingLogsViewModelImpl @Inject constructor(
         }
     }
 
-    override fun callApis(numberOfApi: Int) {
-        viewModelScope.launch(Dispatchers.Main) {
-            isLoading.value = true
-            launch {
-                val threadCount = 30
-                try {
-                    launch {
-                        for (i in 1..threadCount) {
-                            launch(Dispatchers.IO) {
-                                val startTime = System.currentTimeMillis()
-                                logMakerUseCase.execute(numberOfApi / threadCount)
-                                android.util.Log.d(
-                                    TAG,
-                                    "retrieve: run time on $i: ${System.currentTimeMillis() - startTime}"
-                                )
-                            }
-                        }
-                    }.join()
-                    log.value = (Log("Calling completed!", true))
-                } catch (e: Exception) {
-                    log.postValue(Log(e.message.toString(), false))
-                }
-            }.join()
-            isLoading.value = false
+    override fun getEnableState() {
+        viewModelScope.launch {
+            try {
+                val isEnable = getEnableNetworkLoggingUseCase.execute(Unit)
+                log.value = (Log("isNetworkLoggingEnabled(): $isEnable", true))
+            } catch (e: SecurityException) {
+                log.postValue(Log(SecurityExceptionLog, false))
+            } catch (e: Exception) {
+                log.postValue(Log(e.message.toString(), false))
+            }
         }
     }
 

@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.vti.android.delegatedscopemanagement.testapp.common.adapter.data.Log
+import com.vti.android.delegatedscopemanagement.testapp.common.adapter.data.SecurityExceptionLog
 import com.vti.android.delegatedscopemanagement.testapp.ui.main.packageaccess.contract.PackageAccessViewModel
 import com.vti.android.delegatedscopemanagement.testapp.usecase.ClearAppUseCase
 import com.vti.android.delegatedscopemanagement.testapp.usecase.HideAppUseCase
@@ -29,6 +30,8 @@ class PackageAccessViewModelImpl @Inject constructor(
             try {
                 clearAppUseCase.execute(packageName.value.toString())
                 log.postValue(Log("Clear !", true))
+            } catch (e: SecurityException) {
+                log.postValue(Log(SecurityExceptionLog, false))
             } catch (e: Exception) {
                 log.postValue(Log(e.message.toString(), false))
             }
@@ -40,6 +43,8 @@ class PackageAccessViewModelImpl @Inject constructor(
             try {
                 val result = hideAppUseCase.execute(packageName.value.toString())
                 log.postValue(Log("Hide ${packageName.value} package name is $result", true))
+            } catch (e: SecurityException) {
+                log.postValue(Log(SecurityExceptionLog, false))
             } catch (e: Exception) {
                 log.postValue(Log(e.message.toString(), false))
             }
@@ -51,6 +56,8 @@ class PackageAccessViewModelImpl @Inject constructor(
             try {
                 val result = suspendAppUseCase.execute(packageName.value.toString())
                 log.postValue(Log("Suspend ${packageName.value} package name is $result", true))
+            } catch (e: SecurityException) {
+                log.postValue(Log(SecurityExceptionLog, false))
             } catch (e: Exception) {
                 log.postValue(Log(e.message.toString(), false))
             }

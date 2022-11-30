@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.vti.android.delegatedscopemanagement.testapp.common.adapter.data.Log
+import com.vti.android.delegatedscopemanagement.testapp.common.adapter.data.SecurityExceptionLog
 import com.vti.android.delegatedscopemanagement.testapp.ui.main.restriction.contract.RestrictViewModel
 import com.vti.android.delegatedscopemanagement.testapp.usecase.GetRestrictStatus
 import com.vti.android.delegatedscopemanagement.testapp.usecase.RestrictAppUseCase
@@ -94,9 +95,11 @@ class RestrictViewModelImpl @Inject constructor(
             )
             try {
                 restrictAppUseCase.execute(settings)
-                val title = "Restricted"
+                val title = "setApplicationRestrictions(): Restricted"
                 log.postValue(Log(title, true))
-            } catch (e: java.lang.Exception) {
+            } catch (e: SecurityException) {
+                log.postValue(Log(SecurityExceptionLog, false))
+            } catch (e: Exception) {
                 log.postValue(Log(e.message.toString(), false))
             }
         }

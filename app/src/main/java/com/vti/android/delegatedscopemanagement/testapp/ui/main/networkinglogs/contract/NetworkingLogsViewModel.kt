@@ -10,5 +10,5 @@ interface NetworkingLogsViewModel {
     fun enableNetworkLogging(isEnable: Boolean)
     fun getState()
     fun retrieve()
-    fun callApis(numberOfApi: Int)
+    fun getEnableState()
 }

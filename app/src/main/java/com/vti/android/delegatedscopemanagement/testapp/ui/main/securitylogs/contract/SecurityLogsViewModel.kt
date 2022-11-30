@@ -9,4 +9,5 @@ interface SecurityLogsViewModel {
     fun enableSecurityLogging(isEnable: Boolean)
     fun getState()
     fun retrieve()
+    fun getEnableState()
 }
